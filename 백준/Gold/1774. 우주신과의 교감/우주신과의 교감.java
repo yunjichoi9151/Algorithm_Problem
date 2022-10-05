@@ -68,7 +68,7 @@ public class Main {
         x = find(x);
         y = find(y);
         if(x != y) {
-            parent[x] = y;
+            parent[y] = x;
             return true;
         }
         return false;
