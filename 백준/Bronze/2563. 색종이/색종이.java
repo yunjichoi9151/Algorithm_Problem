@@ -3,22 +3,26 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
-        int sum = 0;
-        int[][] arr = new int[101][101];
-        for(int i = 0; i < t; i++) {
+        int[][] map = new int[100][100];
+        int cnt = 0;
+        int n = sc.nextInt();
+        for(int tc = 0; tc < n; tc++) {
             int x = sc.nextInt();
             int y = sc.nextInt();
-            for(int j = x; j < x + 10; j++) {
-                for(int k = y; k < y + 10; k++) {
-                    if(arr[j][k] == 0) {
-                        arr[j][k] = 1;
-                        sum++;
-                    }
+            for(int i = y; i < y + 10; i++) {
+                for(int j = x; j < x + 10; j++) {
+                    map[i][j]++;
                 }
             }
         }
-        System.out.println(sum);
+        for(int i = 0; i < 100; i++) {
+            for(int j = 0; j < 100; j++) {
+                if(map[i][j] > 0) {
+                    cnt++;
+                }
+            }
+        }
+        System.out.println(cnt);
         sc.close();
     }
 }
