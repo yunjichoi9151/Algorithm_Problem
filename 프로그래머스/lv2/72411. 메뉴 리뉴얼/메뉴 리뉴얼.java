@@ -22,7 +22,7 @@ class Solution {
         List<String> list = new ArrayList<>();
         for(int i = 0; i < course.length; i++) {
             for(Map.Entry<String, Integer> m : map.entrySet()) {
-                if(cnt[i] > 1 && course[i] == m.getKey().length() && m.getValue() == cnt[i]) {
+                if(cnt[i] >= 2 && course[i] == m.getKey().length() && m.getValue() == cnt[i]) {
                     list.add(m.getKey());
                 }
             }
