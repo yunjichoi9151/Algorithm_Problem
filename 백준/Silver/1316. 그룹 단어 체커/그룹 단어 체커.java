@@ -5,29 +5,26 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int cnt = 0;
-        for(int i = 0; i < n; i++) {
-            int[] check = new int[26];
+        for(int tc = 1; tc <= n; tc++) {
             String s = sc.next();
-            char[] arr = s.toCharArray();
-            boolean res = true;
-            for(int j = 0; j < arr.length; j++) {
-                int tmp = (int)arr[j] - 97;
-                if(check[tmp] == 0) {
-                    check[tmp]++;
-                } else {
-                    if(arr[j - 1] == arr[j]) {
-                        continue;
-                    } else {
-                        res = false;
+            boolean check[] = new boolean[26];
+            Boolean result = true;
+            for(int i = 0; i < s.length(); i++) {
+                int idx = s.charAt(i) - 'a';
+                if(check[idx]) {
+                    if(s.charAt(i) != s.charAt(i - 1)) {
+                        result = false;
                         break;
                     }
                 }
+                else {
+                    check[idx] = true;
+                }
             }
-            if(res == true) {
+            if(result) {
                 cnt++;
             }
         }
         System.out.println(cnt);
-        sc.close();
     }
 }
