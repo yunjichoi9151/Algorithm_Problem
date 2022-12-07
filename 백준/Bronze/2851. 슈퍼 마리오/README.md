@@ -1,4 +1,4 @@
-# [Bronze I] 슈퍼 마리오 - 2851 
+# [Bronze II] 슈퍼 마리오 - 2851 
 
 [문제 링크](https://www.acmicpc.net/problem/2851) 
 
