@@ -14,7 +14,7 @@
 
 <p>조규현과 백승환은 터렛에 근무하는 직원이다. 하지만 워낙 존재감이 없어서 인구수는 차지하지 않는다. 다음은 조규현과 백승환의 사진이다.</p>
 
-<p style="text-align: center;"><img alt="" src="https://www.acmicpc.net/upload/201003/dfcmhrjj_142c3w76qg8_b.jpg" style="height: 135px; width: 136px;"></p>
+<p style="text-align: center;"><img alt="" src="" style="height: 135px; width: 136px;"></p>
 
 <p>이석원은 조규현과 백승환에게 상대편 마린(류재명)의 위치를 계산하라는 명령을 내렸다. 조규현과 백승환은 각각 자신의 터렛 위치에서 현재 적까지의 거리를 계산했다.</p>
 
