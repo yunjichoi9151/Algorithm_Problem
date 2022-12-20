@@ -24,7 +24,7 @@
 
 
 
-<p><img alt="" src="https://www.acmicpc.net/upload/images/pyta1.png" style="height:128px; width:164px"></p>
+<p><img alt="" src="" style="height:128px; width:164px"></p>
 
 
 
@@ -32,7 +32,7 @@
 
 
 
-<p><img alt="" src="https://www.acmicpc.net/upload/images/pyta2.png" style="height:128px; width:573px"></p>
+<p><img alt="" src="" style="height:128px; width:573px"></p>
 
 
 
