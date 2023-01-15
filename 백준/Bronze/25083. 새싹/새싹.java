@@ -5,6 +5,6 @@ public class Main {
         System.out.println(" \\. \". L_r'");
         System.out.println("   `~\\/");
         System.out.println("      |");
-        System.out.println("      |");
+        System.out.print("      |");
     }
 }
