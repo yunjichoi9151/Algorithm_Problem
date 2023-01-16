@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 1112 KB, 시간: 0 ms
+메모리: 30840 KB, 시간: 68 ms
 
 ### 분류
 
@@ -16,7 +16,7 @@
 
 <p>Найдите величину угла между изгородями у конца короткой канавы.</p>
 
-<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/e9ce24df-ed7a-45ff-8d11-c6a6236fa7d4/-/preview/" style="width: 292px; height: 150px;"></p>
+<p style="text-align: center;"><img alt="" src="" style="width: 292px; height: 150px;"></p>
 
 ### 입력 
 
