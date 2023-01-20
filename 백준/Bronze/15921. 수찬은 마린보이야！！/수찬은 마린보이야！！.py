@@ -1,0 +1,1 @@
+print("divide by zero" if int(input()) == 0 else "1.00")
