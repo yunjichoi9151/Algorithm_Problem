@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 1128 KB, 시간: 0 ms
+메모리: 32952 KB, 시간: 72 ms
 
 ### 분류
 
@@ -18,7 +18,7 @@
 
 <p>You will be responsible for buying the filament to run around the entire perimeter of the artwork. How many centimetres will you need to obtain?</p>
 
-<p style="text-align: center;"><img alt="" src="https://upload.acmicpc.net/2f49e9ec-bf83-45a6-acce-a6d5f6a35d61/-/preview/" style="width: 607px; height: 277px;"></p>
+<p style="text-align: center;"><img alt="" src="" style="width: 607px; height: 277px;"></p>
 
 <p style="text-align: center;">Figure C.1: A test subject for the frame.</p>
 
