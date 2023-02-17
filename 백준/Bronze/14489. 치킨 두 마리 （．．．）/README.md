@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 1112 KB, 시간: 0 ms
+메모리: 30840 KB, 시간: 68 ms
 
 ### 분류
 
@@ -14,7 +14,7 @@
 
 <p>슬프게도, 2017 선린 봄맞이 교내대회의 상품 비용은 욱제의 통장에서 충당된다. 욱제의 마음을 아는지 모르는지, 참가자들이 1등 상품으로 치킨을 무려 두 마리(...)나 달라고 조르고 있다.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="height:96px; width:246px"></p>
+<p style="text-align: center;"><img alt="" src="https://onlinejudgeimages.s3-ap-northeast-1.amazonaws.com/problem/14489/1.png" style="height:96px; width:246px"></p>
 
 <p>욱제에게는 두 개의 통장이 있다. 두 통장의 잔고와 치킨 한 마리의 가격이 주어질 때, 욱제가 치킨 두 마리(...)를 살 수 있는지 알아보자.</p>
 
