@@ -1,0 +1,5 @@
+str1 = input()
+str2 = input()
+count1 = str1.count('a')
+count2 = str2.count('a')
+print("go" if count1 >= count2 else "no")
