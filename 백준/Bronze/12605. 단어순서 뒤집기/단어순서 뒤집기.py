@@ -1,2 +1,4 @@
-for i in range(int(input())):
-    print("Case #%d:"%(i + 1), " ".join(list(reversed(input().split(" ")))))
+n = int(input())
+for i in range(1, n + 1):
+  arr = list(input().rstrip().split())
+  print('Case #%d: %s' %(i, ' '.join(arr[::-1])))
