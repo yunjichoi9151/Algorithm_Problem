@@ -7,8 +7,7 @@ public class Solution {
         for(int t = 1; t <= tc; t++) {
             int n = sc.nextInt();
             int m = sc.nextInt();
-            int tmp = (1 << n) - 1;
-            System.out.println("#" + t + " " + ((m & tmp) == tmp ? "ON" : "OFF"));
+            System.out.println("#" + t + " " + ((m % Math.pow(2, n) == Math.pow(2, n) - 1) ? "ON" : "OFF"));
         }
         sc.close();
     }
