@@ -1,43 +1,47 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int m = sc.nextInt();
-        boolean[] arr = new boolean[21];
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        for(int tc = 0; tc < m; tc++) {
-            String s = sc.next();
-            int x = 0;
-            if (!s.equals("all") && !s.equals("empty")) {
-                x = sc.nextInt();
-            }
-            switch (s) {
-                case "add":
-                    arr[x] = true;
+        StringTokenizer st = null;
+
+        int n = Integer.parseInt(br.readLine());
+        int S = 0;
+        while(n-- > 0) {
+            st = new StringTokenizer(br.readLine());
+            String str = st.nextToken();
+            int num = 0;
+
+            switch(str) {
+                case "add" :
+                    num = Integer.parseInt(st.nextToken()) - 1;
+                    S = S | (1 << num);
                     break;
-                case "remove":
-                    arr[x] = false;
+                case "remove" :
+                    num = Integer.parseInt(st.nextToken()) - 1;
+                    S = S & ~(1 << num);
                     break;
-                case "check":
-                    sb.append(arr[x] ? 1 : 0).append('\n');
+                case "check" :
+                    num = Integer.parseInt(st.nextToken()) - 1;
+                    int temp = S & (1 << num);
+                    sb.append(((temp == 0) ? 0 : 1) + "\n");
                     break;
-                case "toggle":
-                    arr[x] = !arr[x];
+                case "toggle" :
+                    num = Integer.parseInt(st.nextToken()) - 1 ;
+                    S = S ^ (1 << num);
                     break;
-                case "all":
-                    for (int i = 1; i <= 20; i++) {
-                        arr[i] = true;
-                    }
+                case "all" :
+                    S = (1 << 21) - 1;
                     break;
-                case "empty":
-                    for (int i = 1; i <= 20; i++) {
-                        arr[i] = false;
-                    }
+                case "empty" :
+                    S = 0;
                     break;
             }
         }
-        System.out.print(sb);
-        sc.close();
+        System.out.println(sb.toString());
     }
 }
