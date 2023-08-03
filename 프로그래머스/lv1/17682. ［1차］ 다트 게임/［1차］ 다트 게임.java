@@ -1,31 +1,45 @@
 class Solution {
     public int solution(String dartResult) {
-        char[] dart = dartResult.toCharArray();
-        int[] game = new int[3];
-        int idx = -1;
-        for(int i = 0; i < dart.length; i++) {
-            if(dart[i] >= '0' && dart[i] <= '9'){
-                idx++;
-                if(dart[i] == '1' && dart[i + 1] == '0') {
-                    game[idx] = 10;
-                    i++;
+        int char_idx = 0;
+        int arr_idx = -1;
+        int[] arr = new int[3];
+        while(char_idx < dartResult.length()) {
+            char now = dartResult.charAt(char_idx);
+            if(now >= '0' && now <= '9') {
+                if(arr_idx < 2) {
+                    arr_idx++;
+                }
+                if(char_idx + 1 < dartResult.length() && dartResult.charAt(char_idx + 1) == '0') {
+                    arr[arr_idx] = 10;
+                    char_idx++;
                 } else {
-                    game[idx] = dart[i] - '0';
+                    arr[arr_idx] = now - '0';
                 }
+                char_idx++;
+                continue;
             }
-            if(dart[i] == 'D') {
-                game[idx] *= game[idx];
-            } else if(dart[i] == 'T') {
-                game[idx] *= game[idx] * game[idx];
-            } else if(dart[i] == '*') {
-                if(idx > 0) {
-                    game[idx - 1] *= 2;
-                }
-                game[idx] *= 2;
-            } else if(dart[i] == '#') {
-                game[idx] *= -1;
+            switch(now) {
+                case 'S':
+                    arr[arr_idx] *= 1;
+                    break;
+                case 'D':
+                    arr[arr_idx] = (int)Math.pow(arr[arr_idx], 2);
+                    break;
+                case 'T':
+                    arr[arr_idx] = (int)Math.pow(arr[arr_idx], 3);
+                    break;
+                case '*':
+                    if(arr_idx != 0) {
+                        arr[arr_idx - 1] *= 2;
+                    }
+                    arr[arr_idx] *= 2;
+                    break;
+                case '#':
+                    arr[arr_idx] *= (-1);
+                    break;
             }
+            char_idx++;
         }
-        return game[0] + game[1] + game[2];
+        return arr[0] + arr[1] + arr[2];
     }
 }
