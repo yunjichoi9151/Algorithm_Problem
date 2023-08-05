@@ -1,35 +1,29 @@
 class Solution {
     public String solution(String new_id) {
-        String answer = new_id;
-        answer = new_id.toLowerCase();
-        answer = answer.replaceAll("[^a-z0-9-_.]", "");
-        while(answer.contains("..")) {
-            answer = answer.replace("..", ".");
+        String answer = "";
+        new_id = new_id.toLowerCase().replaceAll("[^a-z0-9-_.]", "").replaceAll("\\.{2,}", ".");
+        if(new_id.charAt(0) == '.') {
+            new_id = new_id.substring(1);
         }
-        if(answer.length() > 0 && answer.charAt(0) == '.') {
-            answer = answer.substring(1, answer.length());
+        if(new_id.equals(".")) {
+            new_id = "";
+        } else if(new_id.length() != 0 && new_id.charAt(new_id.length() - 1) == '.') {
+            new_id = new_id.substring(0, new_id.length() - 1);
         }
-        if(answer.length() > 0) {
-            if(answer.charAt(0) == '.') {
-                answer = answer.substring(1, answer.length());
-            }
-            if(answer.charAt(answer.length() - 1) == '.') {
-                answer = answer.substring(0, answer.length() - 1);
-            }
-        } else {
-            answer = "a";
+        if(new_id.equals("")) {
+            new_id = "a";
         }
-        if(answer.length() >= 16) {
-            answer = answer.substring(0, 15);
-        }
-        if(answer.charAt(answer.length() - 1) == '.') {
-            answer = answer.substring(0, answer.length() - 1);
-        }
-        if(answer.length() <= 2) {
-            while(answer.length() < 3) {
-                answer += answer.charAt(answer.length() - 1);
+        if(new_id.length() >= 16) {
+            new_id = new_id.substring(0, 15);
+            if(new_id.charAt(14) == '.') {
+                new_id = new_id.substring(0, 14);
             }
         }
-        return answer;
+        if(new_id.length() <= 2) {
+            while(new_id.length() < 3) {
+                new_id = new_id + new_id.charAt(new_id.length() - 1);
+            }
+        }
+        return new_id;
     }
 }
