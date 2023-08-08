@@ -17,9 +17,7 @@ public class Solution {
             int e = Integer.parseInt(st.nextToken());
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
-            // 인덱스에 해당하는 노드의 부모 정보
             int[] parent = new int[v + 1];
-            // 자식 정보
             ArrayList<ArrayList<Integer>> child = new ArrayList<>();
             for(int i = 0; i <= v; i++) {
                 child.add(new ArrayList<>());
@@ -31,14 +29,12 @@ public class Solution {
                 parent[c] = p;
                 child.get(p).add(c);
             }
-            // a의 조상 노드 구하기
             ArrayList<Integer> ancestor = new ArrayList<>();
             int now = a;
             while(now != 1) {
                 ancestor.add(parent[now]);
                 now = parent[now];
             }
-            // b의 조상 노드를 따라가면 a와 공통조상 찾기
             now = parent[b];
             int common = 0;
             outerLoop:
@@ -51,7 +47,6 @@ public class Solution {
                 }
                 now = parent[now];
             }
-            // 공통 조상을 루트로 하는 서브 트리의 크기
             int cnt = 1;
             Queue<Integer> q = new LinkedList<>();
             q.add(common);
