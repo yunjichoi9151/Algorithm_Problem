@@ -10,7 +10,7 @@ public class Solution {
             boolean isPossible = true;
             for(int i = 0; i < n; i++) {
                 String[] s = br.readLine().split(" ");
-                if(!Character.isDigit(s[1].charAt(0)) && s.length == 2) {
+                if(!Character.isDigit(s[1].charAt(0)) && s.length == 2 || Character.isDigit(s[1].charAt(0)) && s.length > 2) {
                     isPossible = false;
                 } else {
                     continue;
