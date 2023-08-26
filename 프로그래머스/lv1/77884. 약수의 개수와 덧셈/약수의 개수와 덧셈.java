@@ -8,11 +8,7 @@ class Solution {
                     cnt++;
                 }
             }
-            if(cnt % 2 == 0) {
-                answer += i;
-            } else {
-                answer -= i;
-            }
+            answer += cnt % 2 == 0 ? i : -i;
         }
         return answer;
     }
