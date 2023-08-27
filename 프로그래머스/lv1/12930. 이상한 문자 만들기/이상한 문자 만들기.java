@@ -6,14 +6,13 @@ class Solution {
             if(s.charAt(i) == ' ') {
                 answer += " ";
                 cnt = 0;
-                continue;
-            }
-            if(cnt % 2 == 0) {
-                answer += Character.toUpperCase(s.charAt(i));
+            } else if(cnt % 2 == 0) {
+                answer += (s.charAt(i) + "").toUpperCase();
+                cnt++;
             } else {
-                answer += Character.toLowerCase(s.charAt(i));
+                answer += (s.charAt(i) + "").toLowerCase();
+                cnt++;
             }
-            cnt++;
         }
         return answer;
     }
