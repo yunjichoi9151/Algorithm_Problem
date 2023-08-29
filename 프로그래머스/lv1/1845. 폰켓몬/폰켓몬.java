@@ -1,15 +1,12 @@
+import java.util.*;
+
 class Solution {
     public int solution(int[] nums) {
         int answer = 0;
-        int[] pocket = new int[200001];
-        int cnt = 0;
-        for(int i = 0; i < nums.length; i++) {
-            if(pocket[nums[i]] == 0) {
-                cnt++;
-            }
-            pocket[nums[i]]++;
+        Set<Integer> set = new HashSet<>();
+        for(int n : nums) {
+            set.add(n);
         }
-        
-        return cnt > nums.length / 2 ? nums.length / 2 : cnt;
+        return set.size() > nums.length / 2 ? nums.length / 2 : set.size();
     }
 }
