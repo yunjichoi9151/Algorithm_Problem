@@ -1,10 +1,10 @@
 # [unrated] 덧칠하기 - 161989 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/161989) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/161989#) 
 
 ### 성능 요약
 
-메모리: 82.3 MB, 시간: 0.71 ms
+메모리: 83.5 MB, 시간: 0.98 ms
 
 ### 구분
 
@@ -97,7 +97,7 @@ Empty
 <p>입출력 예 #2</p>
 
 <ul>
-<li><p>예제 2번은 1, 3번 영역에 페인트를 다시 칠해야 합니다. 롤러의 길이가 3미터이므로 한 번의 페인트칠에 연속된 3개의 구역을 칠할 수 있고 1, 2, 3번 영역에 페인트칠을 하면 한 번에 1, 3번 영역을 모두 칠할 수 있습니다. </p>
+<li><p>예제 2번은 1, 3번 영역에 페인트를 다시 칠해야 합니다. 롤러의 길이가 4미터이므로 한 번의 페인트칠에 연속된 4개의 구역을 칠할 수 있고 1, 2, 3, 4번 영역에 페인트칠을 하면 한 번에 1, 3번 영역을 모두 칠할 수 있습니다. </p>
 
 <p><img src="https://grepp-programmers.s3.ap-northeast-2.amazonaws.com/files/production/fb5be7bd-e792-4317-9868-f11e7aaf6f03/img2.png" title="" alt="img2.png"></p>
 
@@ -116,7 +116,8 @@ Empty
 
 <hr>
 
-<p>※ 공지 - 2023년 3월 20일 문제 난이도가 Lv. 2 → Lv. 1로 변경되었습니다.</p>
+<p>※ 공지 - 2023년 3월 20일 문제 난이도가 Lv. 2 → Lv. 1로 변경되었습니다.<br>
+※ 공지 - 2023년 8월 17일 문제 지문의 오탈자를 수정했습니다.</p>
 
 
 > 출처: 프로그래머스 코딩 테스트 연습, https://programmers.co.kr/learn/challenges
