@@ -1,45 +1,40 @@
+import java.util.*;
 class Solution {
     public int solution(String dartResult) {
-        int[] arr = new int[3];
-        int answer = 0;
-        int idx = 0;
-        int idx2 = 0;
-        while(idx2 < dartResult.length()) {
-            char c = dartResult.charAt(idx2);
-            switch(c) {
-                case 'S':
-                    idx++;
-                    break;
-                case 'D':
-                    arr[idx] = (int)Math.pow(arr[idx], 2);
-                    idx++;
-                    break;
-                case 'T':
-                    arr[idx] = (int)Math.pow(arr[idx], 3);
-                    idx++;
-                    break;
-                case '*':
-                    arr[idx - 1] *= 2;
-                    if(idx - 2 >= 0) {
-                        arr[idx - 2] *= 2;
+        Stack<Integer> stack = new Stack<>();
+        int sum = 0;
+        for (int i = 0; i < dartResult.length(); ++i) {
+            char c = dartResult.charAt(i);
+            if (Character.isDigit(c)) {
+                sum = (c - '0');
+                if (sum == 1 && i < dartResult.length() - 1 && dartResult.charAt(i + 1) == '0') {
+                    sum = 10;
+                    i++;
+                }
+                stack.push(sum);
+            } else {
+                int prev = stack.pop();
+                if (c == 'D') {
+                    prev *= prev;
+                } else if (c == 'T') {
+                    prev = prev * prev * prev;
+                } else if (c == '*') {
+                    if (!stack.isEmpty()) {
+                        int val = stack.pop() * 2;
+                        stack.push(val);
                     }
-                    break;
-                case '#':
-                    arr[idx - 1] *= -1;
-                    break;
-                default:
-                    arr[idx] = c - '0';
-                    if(arr[idx] == 1 && dartResult.charAt(idx2 + 1) == '0') {
-                        idx2++;
-                        arr[idx] = 10;
-                    }
-                    break;
+                    prev *= 2;
+                } else if (c == '#') {
+                    prev *= (-1);
+                }
+                // System.out.println(prev);
+                stack.push(prev);
             }
-            idx2++;
         }
-        for(int n : arr) {
-            answer += n;
+        int totalScore = 0;
+        while (!stack.isEmpty()) {
+            totalScore += stack.pop();
         }
-        return answer;
+        return totalScore;
     }
 }
