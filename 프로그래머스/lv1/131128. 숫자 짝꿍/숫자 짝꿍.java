@@ -1,29 +1,33 @@
+import java.util.*;
+
 class Solution {
     public String solution(String X, String Y) {
         String answer = "";
-        int[][] arr = new int[10][2];
-        int x_len = X.length();
-        int y_len = Y.length();
-        boolean isTrue = false;
+        int[] num1 = new int[10];
+        int[] num2 = new int[10];
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < x_len; i++) {
-            arr[X.charAt(i) - '0'][0]++;
+        for(int i = 0; i < X.length(); i++) {
+            num1[X.charAt(i) - '0']++;
         }
-        for(int i = 0; i < y_len; i++) {
-            arr[Y.charAt(i) - '0'][1]++;
+        for(int i = 0; i < Y.length(); i++) {
+            num2[Y.charAt(i) - '0']++;
         }
         for(int i = 9; i >= 0; i--) {
-            if(arr[i][0] != 0 && arr[i][1] != 0) {
-                int tmp = Math.min(arr[i][0], arr[i][1]);
-                for(int j = 0; j < tmp; j++) {
+            if(num1[i] != 0 && num2[i] != 0) {
+                int min = Math.min(num1[i], num2[i]);
+                for(int j = 0; j < min; j++) {
                     sb.append(i + "");
                 }
-                isTrue = true;
             }
         }
-        if(!sb.toString().equals("") && sb.charAt(0) == '0') {
-            return "0";
+        if(sb.toString().length() > 0) {
+            if(sb.charAt(0) == '0') {
+                return "0";
+            } else {
+                return sb.toString();
+            }
+        } else {
+            return "-1";
         }
-        return isTrue ? sb.toString() : "-1";
     }
 }
