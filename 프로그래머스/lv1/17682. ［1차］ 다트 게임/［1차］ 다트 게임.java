@@ -1,45 +1,45 @@
 class Solution {
     public int solution(String dartResult) {
-        int char_idx = 0;
-        int arr_idx = -1;
         int[] arr = new int[3];
-        while(char_idx < dartResult.length()) {
-            char now = dartResult.charAt(char_idx);
-            if(now >= '0' && now <= '9') {
-                if(arr_idx < 2) {
-                    arr_idx++;
-                }
-                if(char_idx + 1 < dartResult.length() && dartResult.charAt(char_idx + 1) == '0') {
-                    arr[arr_idx] = 10;
-                    char_idx++;
-                } else {
-                    arr[arr_idx] = now - '0';
-                }
-                char_idx++;
-                continue;
-            }
-            switch(now) {
+        int answer = 0;
+        int idx = 0;
+        int idx2 = 0;
+        while(idx2 < dartResult.length()) {
+            char c = dartResult.charAt(idx2);
+            switch(c) {
                 case 'S':
-                    arr[arr_idx] *= 1;
+                    idx++;
                     break;
                 case 'D':
-                    arr[arr_idx] = (int)Math.pow(arr[arr_idx], 2);
+                    arr[idx] = (int)Math.pow(arr[idx], 2);
+                    idx++;
                     break;
                 case 'T':
-                    arr[arr_idx] = (int)Math.pow(arr[arr_idx], 3);
+                    arr[idx] = (int)Math.pow(arr[idx], 3);
+                    idx++;
                     break;
                 case '*':
-                    if(arr_idx != 0) {
-                        arr[arr_idx - 1] *= 2;
+                    arr[idx - 1] *= 2;
+                    if(idx - 2 >= 0) {
+                        arr[idx - 2] *= 2;
                     }
-                    arr[arr_idx] *= 2;
                     break;
                 case '#':
-                    arr[arr_idx] *= (-1);
+                    arr[idx - 1] *= -1;
+                    break;
+                default:
+                    arr[idx] = c - '0';
+                    if(arr[idx] == 1 && dartResult.charAt(idx2 + 1) == '0') {
+                        idx2++;
+                        arr[idx] = 10;
+                    }
                     break;
             }
-            char_idx++;
+            idx2++;
         }
-        return arr[0] + arr[1] + arr[2];
+        for(int n : arr) {
+            answer += n;
+        }
+        return answer;
     }
 }
