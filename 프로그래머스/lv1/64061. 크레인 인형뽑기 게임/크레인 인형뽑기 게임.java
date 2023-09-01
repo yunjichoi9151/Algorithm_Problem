@@ -4,21 +4,16 @@ class Solution {
     public int solution(int[][] board, int[] moves) {
         int answer = 0;
         Stack<Integer> stack = new Stack<>();
-        int before = 0;
-        for(int i = 0; i < moves.length; i++) {
-            for(int j = 0; j < board.length; j++) {
-                if(board[j][moves[i] - 1] != 0) {
-                    stack.push(board[j][moves[i] - 1]);
-                    board[j][moves[i] - 1] = 0;
-                    while(!stack.isEmpty() && before == stack.peek()) {
+        for(int t = 0; t < moves.length; t++) {
+            for(int i = 0; i < board.length; i++) {
+                if(board[i][moves[t] - 1] != 0) {
+                    if(!stack.isEmpty() && stack.peek() == board[i][moves[t] - 1]) {
                         stack.pop();
-                        answer++;
-                    }
-                    if(stack.isEmpty()) {
-                        before = 0;
+                        answer += 2;
                     } else {
-                        before = stack.peek();
+                        stack.push(board[i][moves[t] - 1]);
                     }
+                    board[i][moves[t] - 1] = 0;
                     break;
                 }
             }
