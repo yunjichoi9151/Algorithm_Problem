@@ -1,30 +1,16 @@
 class Solution {
     public int[] solution(String[] wallpaper) {
-        int[] answer = {Integer.MAX_VALUE, Integer.MAX_VALUE, 0, 0};
-        char[][] paper = new char[wallpaper.length][wallpaper[0].length()];
-        
+        int[] answer = {Integer.MAX_VALUE, Integer.MAX_VALUE, 1, 1};
         for(int i = 0; i < wallpaper.length; i++) {
-            char[] tmp = wallpaper[i].toCharArray();
-            for(int j = 0; j < tmp.length; j++) {
-                paper[i][j] = tmp[j];
-                if(paper[i][j] == '#') {
-                    if(i < answer[0]) {
-                        answer[0] = i;
-                    }
-                    if(i > answer[2]) {
-                        answer[2] = i;
-                    }
-                    if(j < answer[1]) {
-                        answer[1] = j;
-                    }
-                    if(j > answer[3]) {
-                        answer[3] = j;
-                    }
+            for(int j = 0; j < wallpaper[0].length(); j++) {
+                if(wallpaper[i].charAt(j) == '#') {
+                    answer[0] = Math.min(answer[0], i);
+                    answer[1] = Math.min(answer[1], j);
+                    answer[2] = Math.max(answer[2], i + 1);
+                    answer[3] = Math.max(answer[3], j + 1);
                 }
             }
         }
-        answer[2]++;
-        answer[3]++;
         return answer;
     }
 }
