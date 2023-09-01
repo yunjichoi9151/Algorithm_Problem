@@ -1,34 +1,53 @@
 class Solution {
     public String solution(int[] numbers, String hand) {
         String answer = "";
-        int[][] keypad = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}, {-1, 0, -2}};
-        int[][] now = {{3, 0}, {3, 2}};
-        for(int i = 0; i < numbers.length; i++) {
-            if(numbers[i] == 1 || numbers[i] == 4 || numbers[i] == 7) {
-                answer += "L";
-                now[0] = new int[]{numbers[i] / 3, 0};
-            } else if(numbers[i] == 3 || numbers[i] == 6 || numbers[i] == 9) {
-                answer += "R";
-                now[1] = new int[]{numbers[i] / 3 - 1, 2};
-            } else {
-                int x = numbers[i] >= 2 ? numbers[i] / 3 : 3;
-                int left_dis = Math.abs(now[0][0] - x) + Math.abs(now[0][1] - 1);
-                int right_dis = Math.abs(now[1][0] - x) + Math.abs(now[1][1] - 1);
-                if(left_dis == right_dis) {
-                    if(hand.equals("left")) {
-                        answer += "L";
-                        now[0] = new int[]{x, 1};
+        int[] left = {3, 0};
+        int[] right = {3, 2};
+        for(int n : numbers) {
+            switch(n) {
+                case 1:
+                case 4:
+                case 7:
+                    answer += "L";
+                    left[0] = (n - 1) / 3;
+                    left[1] = 0;
+                    break;
+                case 3:
+                case 6:
+                case 9:
+                    answer += "R";
+                    right[0] = n / 3 - 1;
+                    right[1] = 2;
+                    break;
+                case 0:
+                    n = 11;
+                case 2:
+                case 5:
+                case 8:
+                    int l = Math.abs(n / 3 - left[0]) + Math.abs(1 - left[1]);
+                    int r = Math.abs(n / 3 - right[0]) + Math.abs(1 - right[1]);
+                    if(l == r) {
+                        if(hand.equals("left")) {
+                            answer += "L";
+                            left[0] = n / 3;
+                            left[1] = 1;
+                        } else {
+                            answer += "R";
+                            right[0] = n / 3;
+                            right[1] = 1;
+                        }
                     } else {
-                        answer += "R";
-                        now[1] = new int[]{x, 1};
+                        if(l < r) {
+                            answer += "L";
+                            left[0] = n / 3;
+                            left[1] = 1;
+                        } else {
+                            answer += "R";
+                            right[0] = n / 3;
+                            right[1] = 1;
+                        }
                     }
-                } else if(left_dis < right_dis) {
-                    answer += 'L';
-                    now[0] = new int[]{x, 1};
-                } else {
-                    answer += 'R';
-                    now[1] = new int[]{x, 1};
-                }
+                    break;
             }
         }
         return answer;
