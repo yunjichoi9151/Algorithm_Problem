@@ -1,24 +1,18 @@
 class Solution {
     public int solution(int n) {
-        int answer = n + 1;
-        int count = calculate(n);
+        int num = n + 1;
+        int len = cal(n);
         while(true) {
-            if(calculate(answer) == count) {
-                return answer;
-            } else {
-                answer++;
-            }
+            if(cal(num) == len) return num;
+            else num++;
         }
     }
-    
-    public int calculate(int n) {
-        int cnt = 0;
-        String s = Integer.toBinaryString(n);
+    public int cal(int x) {
+        int sum = 0;
+        String s =  Integer.toBinaryString(x);
         for(int i = 0; i < s.length(); i++) {
-            if(s.charAt(i) == '1') {
-                cnt++;
-            }
+            if(s.charAt(i) == '1') sum++;
         }
-        return cnt;
+        return sum;
     }
 }
