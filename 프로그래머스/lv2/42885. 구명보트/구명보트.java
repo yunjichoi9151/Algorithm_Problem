@@ -1,4 +1,4 @@
-import java.util.Arrays;
+import java.util.*;
 
 class Solution {
     public int solution(int[] people, int limit) {
