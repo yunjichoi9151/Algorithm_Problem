@@ -4,15 +4,13 @@ class Solution {
     public int solution(int[] priorities, int location) {
         int answer = 0;
         Queue<Integer> queue = new LinkedList<>();
-        int[] arr = new int[priorities.length];
-        arr = Arrays.copyOf(priorities, priorities.length);
-        Arrays.sort(arr);
-        int idx = arr.length - 1;
+        int idx = priorities.length - 1;
         for(int n : priorities) {
             queue.add(n);
         }
+        Arrays.sort(priorities);
         while(!queue.isEmpty()) {
-            if(queue.peek() == arr[idx]) {
+            if(queue.peek() == priorities[idx]) {
                 queue.remove();
                 idx--;
                 answer++;
