@@ -1,59 +1,38 @@
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 class Solution {
     public int[] solution(int[] fees, String[] records) {
-        HashMap<String, Integer> isParking = new HashMap<String, Integer>();
-        HashMap<String, String> cars = new HashMap<String, String>();
-        for(int i = 0; i < records.length; i++) {
-            String[] tmp = records[i].split(" ");
-            if(tmp[2].equals("IN")) {
-                cars.put(tmp[1], tmp[0]);
-            } else if(tmp[2].equals("OUT")) {
-                String[] inTime = cars.get(tmp[1]).split(":");
-                cars.remove(tmp[1]);
-                String[] outTime = tmp[0].split(":");
-                int time = 0;
-                time += ((Integer.parseInt(outTime[0]) - Integer.parseInt(inTime[0])) * 60) + (Integer.parseInt(outTime[1]) - Integer.parseInt(inTime[1]));
-                if(isParking.containsKey(tmp[1])) {
-                    isParking.replace(tmp[1], isParking.get(tmp[1]) + time);
+        TreeMap<String, Integer> time = new TreeMap<>();
+        HashMap<String, Integer> car = new HashMap<>();
+        for(String s : records) {
+            String[] arr = s.split(":| ");
+            if(time.containsKey(arr[2])) {
+                if(arr[3].equals("IN")) {
+                    time.put(arr[2], convert(arr[0], arr[1]));
                 } else {
-                    isParking.put(tmp[1], time);
+                    car.put(arr[2], car.getOrDefault(arr[2], 0) + convert(arr[0], arr[1]) - time.get(arr[2]));
+                    time.put(arr[2], 0);
                 }
+            } else {
+                time.put(arr[2], convert(arr[0], arr[1]));
             }
         }
-        for(String key : cars.keySet()) {
-            String[] inTime = cars.get(key).split(":");
-            int time = 0;
-            time += ((23 - Integer.parseInt(inTime[0])) * 60) + (59 - Integer.parseInt(inTime[1]));
-            if(isParking.containsKey(key)) {
-                isParking.replace(key, isParking.get(key) + time);
+        int[] answer = new int[time.size()];
+        int idx = 0;
+        for(String key : time.keySet()) {
+            if(car.containsKey(key) && time.get(key) == 0) {
+                answer[idx++] = cal(car.get(key), fees);
             } else {
-                isParking.put(key, time);
+                answer[idx++] = cal(car.getOrDefault(key, 0) + 23 * 60 + 59 - time.get(key), fees);
             }
-        }
-        Object[] sorting = isParking.keySet().toArray();
-        Arrays.sort(sorting);
-        int[] answer = new int[sorting.length];
-        for(int i = 0; i < sorting.length; i++) {
-            int finalTime = isParking.get(sorting[i]);
-            int fee = 0;
-            if(finalTime >= fees[0]) {
-                finalTime -= fees[0];
-                fee = fees[1];
-            } else {
-                finalTime = 0;
-                fee = fees[1];
-            }
-            if(finalTime > 0) {
-                if(finalTime % fees[2] == 0) {
-                    fee += finalTime / fees[2] * fees[3];
-                } else {
-                    fee += (finalTime / fees[2] + 1) * fees[3];
-                }
-            }
-            answer[i] = fee;
         }
         return answer;
+    }
+    public int cal(int num, int[] fees) {
+        if(num <= fees[0]) return fees[1];
+        else return fees[1] + (int)Math.ceil((double)(num - fees[0]) / fees[2]) * fees[3];
+    }
+    public int convert(String s1, String s2) {
+        return Integer.parseInt(s1) * 60 + Integer.parseInt(s2);
     }
 }
