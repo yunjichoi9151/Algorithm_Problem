@@ -1,31 +1,28 @@
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-public class Solution {
+class Solution {
     public String[] solution(String[] record) {
-        Map<String, String> map = new HashMap<>();
-        List<String[]> log = new LinkedList<>();
-        int idx = 0;
-        for(int i = 0; i < record.length; i++) {
-            String[] words = record[i].split(" ");
-            if(words[0].equals("Enter")) {
-                map.put(words[1], words[2]);
-                log.add(words);
-            } else if(words[0].equals("Change")) {
-                map.put(words[1], words[2]);
-            } else if(words[0].equals("Leave")) {
-                log.add(words);
+        HashMap<String, String> map = new HashMap<>();
+        int cnt = 0;
+        for(String s : record) {
+            String[] arr = s.split(" ");
+            if(arr[0].equals("Enter")) {
+                map.put(arr[1], arr[2]);
+                cnt++;
+            } else if(arr[0].equals("Leave")) {
+                cnt++;
+            } else if(arr[0].equals("Change")) {
+                map.put(arr[1], arr[2]);
             }
         }
-        String[] answer = new String[log.size()];
-        for(String[] word : log) {
-            String name = map.get(word[1]);
-            if(word[0].equals("Enter")) {
-                answer[idx++] = name + "님이 들어왔습니다.";
-            } else if(word[0].equals("Leave")) {
-                answer[idx++] = name + "님이 나갔습니다.";
+        String[] answer = new String[cnt];
+        int idx = 0;
+        for(String s : record) {
+            String[] arr = s.split(" ");
+            if(arr[0].equals("Enter")) {
+                answer[idx++] = map.get(arr[1]) + "님이 들어왔습니다.";
+            } else if(arr[0].equals("Leave")) {
+                answer[idx++] = map.get(arr[1]) + "님이 나갔습니다.";
             }
         }
         return answer;
