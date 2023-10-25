@@ -1,5 +1,3 @@
-import java.util.Arrays;
-
 class Solution {
     public int[] solution(int[] lottos, int[] win_nums) {
         int[] ans = {7, 7};
