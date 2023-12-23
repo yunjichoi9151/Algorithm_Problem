@@ -5,12 +5,9 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int h = sc.nextInt();
         int m = sc.nextInt();
-        int t = h * 60 + m;
-        if(t >= 45) {
-            System.out.println(((t - 45) / 60) + " " + ((t - 45) % 60));
-        } else {
-            System.out.println(((t - 45 + 1440) / 60) + " " + ((t - 45 + 1440) % 60));
-        }
+        int t = h * 60 + m - 45;
+        if(t < 0) t += 24 * 60;
+        System.out.println((t / 60) + " " + (t % 60));
         sc.close();
     }
 }
