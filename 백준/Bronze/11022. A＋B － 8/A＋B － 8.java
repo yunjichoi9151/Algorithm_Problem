@@ -3,12 +3,14 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+        StringBuilder sb = new StringBuilder();
         int t = sc.nextInt();
-        for(int tc = 1; tc <= t; tc++) {
+        for(int i = 1; i <= t; i++) {
             int a = sc.nextInt();
             int b = sc.nextInt();
-            System.out.println("Case #" + tc + ": " + a + " + " + b + " = " + (a + b));
+            sb.append("Case #" + i + ": " + a + " + " + b + " = " + (a + b) + "\n");
         }
+        System.out.print(sb.toString());
         sc.close();
     }
 }
