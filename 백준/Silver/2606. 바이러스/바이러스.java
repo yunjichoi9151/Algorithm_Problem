@@ -1,36 +1,44 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.util.StringTokenizer;
 
 public class Main {
-    static boolean tree[][];
+    static int n, m, v;
+    static ArrayList<ArrayList<Integer>> list;
     static boolean[] visit;
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt(), m = sc.nextInt();
-        int cnt = 0;
-        tree = new boolean[n + 1][n + 1];
-        for(int i = 0; i < m; i++) {
-            int n1 = sc.nextInt();
-            int n2 = sc.nextInt();
-            tree[n1][n2] = true;
-            tree[n2][n1] = true;
-        }
+    static int cnt = 0;
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        n = Integer.parseInt(br.readLine());
+        m = Integer.parseInt(br.readLine());
+        v = 1;
+        list = new ArrayList<>();
         visit = new boolean[n + 1];
-        Queue<Integer> queue = new LinkedList<Integer>();
-        queue.add(1);
-        visit[1] = true;
-        while(!queue.isEmpty()) {
-            int x = queue.poll();
-            for(int i = 1; i < tree.length; i++) {
-                if(!visit[i] && tree[x][i]) {
-                    visit[i] = true;
-                    queue.add(i);
-                    cnt++;
-                }
+        for (int i = 0; i <= n; i++) {
+            list.add(new ArrayList<>());
+        }
+        for (int i = 0; i < m; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int n1 = Integer.parseInt(st.nextToken());
+            int n2 = Integer.parseInt(st.nextToken());
+            list.get(n1).add(n2);
+            list.get(n2).add(n1);
+        }
+        System.out.println(dfs(v));
+        br.close();
+    }
+
+    static int dfs(int i) {
+        visit[i] = true;
+        for (int k : list.get(i)) {
+            if (!visit[k]) {
+                cnt++;
+                dfs(k);
             }
         }
-        System.out.println(cnt);
+        return cnt;
     }
 }

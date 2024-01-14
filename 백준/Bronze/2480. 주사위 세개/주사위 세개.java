@@ -3,22 +3,15 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int[] arr = new int[3];
-        int max = 0;
-        for(int i = 0; i < 3; i++) {
-            arr[i] = sc.nextInt();
-            if(max < arr[i]) {
-                max = arr[i];
-            }
-        }
-        if(arr[0] == arr[1] && arr[1] == arr[2]) {
-            System.out.println(10000 + arr[0] * 1000);
-        } else if(arr[0] == arr[1] || arr[1] == arr[2]) {
-            System.out.println(1000 + arr[1] * 100);
-        } else if(arr[2] == arr[0]) {
-            System.out.println(1000 + arr[2] * 100);
+        int n1 = sc.nextInt();
+        int n2 = sc.nextInt();
+        int n3 = sc.nextInt();
+        if(n1 == n2 && n2 == n3) {
+            System.out.println(10000 + n1 * 1000);
+        } else if(n1 == n2 || n2 == n3 || n3 == n1) {
+            System.out.println(1000 + (n1 == n2 ? n1 : n3) * 100);
         } else {
-            System.out.println(max * 100);
+            System.out.println(Math.max(n1, Math.max(n2, n3)) * 100);
         }
         sc.close();
     }

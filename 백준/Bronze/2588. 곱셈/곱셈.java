@@ -5,10 +5,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int a = sc.nextInt();
         int b = sc.nextInt();
-        System.out.println(a * (b % 10));
-        System.out.println(a * ((b % 100) / 10));
-        System.out.println(a * (b / 100));
-        System.out.println(a * b);
+        int ans = a * b;
+        while(b > 0) {
+            System.out.println(a * (b % 10));
+            b /= 10;
+        }
+        System.out.println(ans);
         sc.close();
     }
 }

@@ -5,13 +5,12 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int x = sc.nextInt();
         int n = sc.nextInt();
-        int sum = 0;
         for(int i = 0; i < n; i++) {
             int a = sc.nextInt();
             int b = sc.nextInt();
-            sum += a * b;
+            x -= a * b;
         }
-        System.out.println(sum == x ? "Yes" : "No");
+        System.out.println(x == 0 ? "Yes" : "No");
         sc.close();
     }
 }
