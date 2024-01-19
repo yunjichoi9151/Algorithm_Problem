@@ -1,17 +1,14 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Integer> arr = new ArrayList<>();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        HashSet<Integer> set = new HashSet<>();
         for(int i = 0; i < 10; i++) {
-            int tmp = sc.nextInt() % 42;
-            if(!arr.contains(tmp)) {
-                arr.add(tmp);
-            }
+            int n = Integer.parseInt(br.readLine());
+            set.add(n % 42);
         }
-        System.out.println(arr.size());
-        sc.close();
+        System.out.println(set.size());
     }
 }
