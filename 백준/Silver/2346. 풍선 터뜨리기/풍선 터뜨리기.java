@@ -1,35 +1,34 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.LinkedList;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();
-        int num = Integer.parseInt(br.readLine());
-        int index = 0;
-        LinkedList<int[]> list = new LinkedList<>();
-        StringTokenizer input = new StringTokenizer(br.readLine());
-        for (int x = 0; x < num; x++) {
-            list.add(new int[]{x+1,Integer.parseInt(input.nextToken())});
+        Deque<Integer> deq = new ArrayDeque<>();
+        int N = sc.nextInt();
+        int[] arr = new int[N + 1];
+        boolean isTrue = true;
+        for(int i = 1; i <= N; i++) {
+            deq.add(i);
+            arr[i] = sc.nextInt();
         }
-        while (list.size()!=1) {
-            int move = list.get(index)[1];
-            int size = list.size() - 1;
-            sb.append(list.get(index)[0]).append(" ");
-            list.remove(index);
-
-            if (move > 0) {
-                move--;
-            }
-            index = (index + move) % size;
-            if (index < 0) {
-                index += size;
+        while(!deq.isEmpty()) {
+            int num = isTrue ? deq.pollFirst() : deq.pollLast();
+            sb.append(num + (!deq.isEmpty() ? " " : ""));
+            if(deq.isEmpty()) break;
+            if(arr[num] > 0) {
+                for(int i = 1; i < arr[num]; i++) {
+                    deq.addLast(deq.pollFirst());
+                }
+                isTrue = true;
+            } else {
+                for(int i = 1; i < Math.abs(arr[num]); i++) {
+                    deq.addFirst(deq.pollLast());
+                }
+                isTrue = false;
             }
         }
-        sb.append(list.get(0)[0]);
-        System.out.println(sb);
+        System.out.println(sb.toString());
+        sc.close();
     }
 }
