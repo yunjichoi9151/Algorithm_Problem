@@ -1,46 +1,42 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Deque;
-import java.util.LinkedList;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
         StringBuilder sb = new StringBuilder();
-        Deque<Integer> deque = new LinkedList<>();
-        int n = Integer.parseInt(br.readLine());
-        for(int i = 0; i < n; i++) {
-            String[] s = br.readLine().split(" ");
-            int num = Integer.parseInt(s[0]);
-            switch(num) {
+        Deque<Integer> deq = new ArrayDeque<>();
+        int N = sc.nextInt();
+        for(int i = 0; i < N; i++) {
+            int x = sc.nextInt();
+            switch(x) {
                 case 1:
-                    deque.addFirst(Integer.parseInt(s[1]));
+                    deq.addFirst(sc.nextInt());
                     break;
                 case 2:
-                    deque.addLast(Integer.parseInt(s[1]));
+                    deq.addLast(sc.nextInt());
                     break;
                 case 3:
-                    sb.append(deque.isEmpty() ? -1 : deque.pollFirst());
+                    sb.append(!deq.isEmpty() ? deq.pollFirst() : -1);
                     break;
                 case 4:
-                    sb.append(deque.isEmpty() ? -1 : deque.pollLast());
+                    sb.append(!deq.isEmpty() ? deq.pollLast() : -1);
                     break;
                 case 5:
-                    sb.append(deque.size());
+                    sb.append(deq.size());
                     break;
                 case 6:
-                    sb.append(deque.isEmpty() ? 1 : 0);
+                    sb.append(deq.isEmpty() ? 1 : 0);
                     break;
                 case 7:
-                    sb.append(deque.isEmpty() ? -1 : deque.getFirst());
+                    sb.append(!deq.isEmpty() ? deq.peekFirst() : -1);
                     break;
                 case 8:
-                    sb.append(deque.isEmpty() ? -1 : deque.getLast());
+                    sb.append(!deq.isEmpty() ? deq.peekLast() : -1);
                     break;
             }
-            if(num != 1 && num != 2) sb.append("\n");
+            if(x != 1 && x != 2) sb.append('\n');
         }
         System.out.print(sb.toString());
+        sc.close();
     }
 }
