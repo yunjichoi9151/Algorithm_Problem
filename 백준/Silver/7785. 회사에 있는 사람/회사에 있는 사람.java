@@ -1,24 +1,20 @@
-import java.util.Scanner;
-import java.util.TreeMap;
-import java.util.ArrayList;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        TreeMap<String, String> map = new TreeMap<>();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        TreeSet<String> set = new TreeSet<>();
+        int n = Integer.parseInt(br.readLine());
         for(int i = 0; i < n; i++) {
-            String name = sc.next();
-            String state = sc.next();
-            map.put(name, state);
+            String[] tmp = br.readLine().split(" ");
+            if(tmp[1].equals("enter")) set.add(tmp[0]);
+            else set.remove(tmp[0]);
         }
-        ArrayList<String> keySet = new ArrayList<>(map.keySet());
-        for(int i = keySet.size() - 1; i >= 0; i--) {
-            String key = keySet.get(i);
-            if(map.get(key).equals("enter")) {
-                System.out.println(key);
-            }
+        for(String s : set) {
+            sb.insert(0, s + "\n");
         }
-        sc.close();
+        System.out.print(sb.toString().trim());
     }
 }
