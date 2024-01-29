@@ -4,11 +4,15 @@
 
 ### 성능 요약
 
-메모리: 118560 KB, 시간: 1956 ms
+메모리: 66460 KB, 시간: 620 ms
 
 ### 분류
 
 자료 구조, 해시를 사용한 집합과 맵
+
+### 제출 일자
+
+2024년 1월 29일 23:34:06
 
 ### 문제 설명
 
@@ -46,11 +50,11 @@
 
 <p>이다솜 : 네. 야호!!</p>
 
-<p>'<img alt="" src="https://www.acmicpc.net/upload/201004/p3.PNG" style="height:181px; width:274px"></p>
+<p>'<img alt="" src="" style="height:181px; width:274px"></p>
 
 <p>오영식 : 어? 오박사님 얘는 누구인가요?</p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/p4.PNG" style="height:182px; width:274px"></p>
+<p><img alt="" src="" style="height:182px; width:274px"></p>
 
 <p>오박사 : 얘는 너의 라이벌이 될 친구 이다솜이라고 하네. 자, 포켓몬을 한 마리 골라보도록 해봐라 다솜아. 레이디퍼스트 네가 먼저 골라봐라.</p>
 
@@ -66,7 +70,7 @@
 
 <p>이다솜 : 피카츄 공격!</p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/p6.PNG" style="height:182px; width:274px"></p>
+<p><img alt="" src="" style="height:182px; width:274px"></p>
 
 <p>가라 몬스터 볼!</p>
 
@@ -76,11 +80,11 @@
 
 <p>이다솜 : 그럼! 일단 사천왕을 이기고 오겠어!</p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/p8.PNG" style="height:181px; width:274px"></p>
+<p><img alt="" src="" style="height:181px; width:274px"></p>
 
 <p>이다솜 : 여기가 사천왕과 대결하려면 가야하는 곳인가..</p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/p9.PNG" style="height:181px; width:274px"></p>
+<p><img alt="" src="" style="height:181px; width:274px"></p>
 
 <p>경비원 : 사천왕과 대결을 하려면, 마을의 체육관 리더를 이겨서 배지를 8개를 모아야 한다네... 배지를 모아서 오도록 하게</p>
 
@@ -90,13 +94,13 @@
 
 <p>그동안의 줄거리 : 이다솜은 일단 상록 숲의 체육관 리더에게 도전을 했다. 하지만 상록숲 체육관의 리더는 실종된 상태. 따라서 회색마을부터 도전하기로 했다. 체육관의 리더를 이기면서, 로켓단을 해체시키기도 하고, 여러 가지 사건도 있었다. 결국 전설의 포켓몬도 잡고, 이제 사천왕을 이기려고 도전하기로 했다. 사천왕은 모두 가볍게 이기고, 이제 마지막 라이벌 오!영!식! 이다.</p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/pa.PNG" style="height:183px; width:274px"></p>
+<p><img alt="" src="" style="height:183px; width:274px"></p>
 
 <p>오영식 : 훗. 1년 전의 그 이다솜이 사천왕을 이기고 현재 포켓몬 마스터인 나에게 덤벼? 어디 한번 덤벼보시지.</p>
 
 <p>이다솜 : 헐랭... 나를 우습게보네.... 한번 두고 보시지! 그럼 대결이닷!</p>
 
-<p><img alt="" src="" style="height:181px; width:274px"></p>
+<p><img alt="" src="https://www.acmicpc.net/upload/201004/pb.PNG" style="height:181px; width:274px"></p>
 
 <p><img alt="" src="" style="height:183px; width:274px"></p>
 
@@ -106,11 +110,11 @@
 
 <p><img alt="" src="" style="height:183px; width:274px"></p>
 
-<p><img alt="" src="" style="height:181px; width:274px"></p>
+<p><img alt="" src="https://www.acmicpc.net/upload/201004/pg.PNG" style="height:181px; width:274px"></p>
 
-<p><img alt="" src="" style="height:184px; width:274px"></p>
+<p><img alt="" src="https://www.acmicpc.net/upload/201004/ph.PNG" style="height:184px; width:274px"></p>
 
-<p><img alt="" src="" style="height:184px; width:274px"></p>
+<p><img alt="" src="https://www.acmicpc.net/upload/201004/pi.PNG" style="height:184px; width:274px"></p>
 
 <p>이다솜 : 휴... 이겼다.</p>
 
