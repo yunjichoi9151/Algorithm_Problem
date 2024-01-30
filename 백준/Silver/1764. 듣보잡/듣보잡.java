@@ -1,29 +1,29 @@
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Scanner;
-import java.util.TreeSet;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int n = sc.nextInt();
-		int m = sc.nextInt();
-		HashSet<String> setA = new HashSet<>();
-		TreeSet<String> setB = new TreeSet<>();
-		for(int i = 0; i < n; i++) {
-			setA.add(sc.next());
-		}
-		for(int i = 0; i < m; i++) {
-			String tmp = sc.next();
-			if(setA.contains(tmp)) {
-				setB.add(tmp);
-			}
-		}
-		System.out.println(setB.size());
-		Iterator<String> iter = setB.iterator();
-		while(iter.hasNext()) {
-			System.out.println(iter.next());
-		}
-		sc.close();
-	}
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        HashSet<String> set = new HashSet<>();
+        ArrayList<String> list = new ArrayList<>();
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int cnt = 0;
+        for(int i = 0; i < N; i++) {
+            set.add(br.readLine());
+        }
+        for(int i = 0; i < M; i++) {
+            String s = br.readLine();
+            if(set.contains(s)) {
+                cnt++;
+                list.add(s);
+            }
+        }
+        Collections.sort(list);
+        System.out.println(cnt);
+        for(String s : list) {
+            System.out.println(s);
+        }
+    }
 }
