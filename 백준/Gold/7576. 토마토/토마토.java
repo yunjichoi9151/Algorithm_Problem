@@ -1,71 +1,61 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    static int[][] store;
-    static Queue<int[]> queue = new LinkedList<>();
-    static int n;
-    static int m;
-    static int dx[] = {0, 0, -1, 1};
-    static int dy[] = {-1, 1, 0, 0};
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        m = sc.nextInt();
-        n = sc.nextInt();
-        store = new int[n][m];
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) {
-                store[i][j] = sc.nextInt();
-                if(store[i][j] == 1) {
-                    queue.add(new int[]{i, j});
-                }
+    static int N, M, cnt, ans;
+    static int[][] map;
+    static boolean[][] visited;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        M = Integer.parseInt(st.nextToken());
+        N = Integer.parseInt(st.nextToken());
+        map = new int[N][M];
+        visited = new boolean[N][M];
+        Queue<Node> que = new LinkedList<Node>();
+        for(int i = 0; i < N; i++) {
+            st = new StringTokenizer(br.readLine());
+            for(int j = 0; j < M; j++) {
+                map[i][j] = Integer.parseInt(st.nextToken());
+                if(map[i][j] == 1) {
+                    visited[i][j] = true;
+                    que.add(new Node(i, j));
+                } else if(map[i][j] == 0) cnt++;
             }
         }
-        System.out.println(BFS());
+        if(cnt == 0) {
+            System.out.println(0);
+            return;
+        }
+        BFS(que);
+        System.out.println(cnt == 0 ? ans - 1 : -1);
     }
 
-    public static int BFS() {
-        while(!queue.isEmpty()) {
-            int[] tmp = queue.poll();
-            int a = tmp[0];
-            int b = tmp[1];
+    public static void BFS(Queue<Node> que) {
+        int[] dx = {0, 0, -1, 1};
+        int[] dy = {-1, 1, 0, 0};
+        while(!que.isEmpty()) {
+            Node node = que.poll();
             for(int i = 0; i < 4; i++) {
-                int x = a + dx[i];
-                int y = b + dy[i];
-                if(x < 0 || x >= n || y < 0 || y >= m) {
-                    continue;
-                }
-                if(store[x][y] == 0) {
-                    store[x][y] = store[a][b] + 1;
-                    queue.add(new int[]{x, y});
-                }
-            }
-        }
-        int max = Integer.MIN_VALUE;
-        if(checkZero()) {
-            return -1;
-        }
-        else {
-            for(int i = 0; i < n; i++) {
-                for(int j = 0; j < m; j++) {
-                    if(max < store[i][j]) {
-                        max = store[i][j];
-                    }
+                int nx = node.x + dx[i];
+                int ny = node.y + dy[i];
+                if(nx < 0 || ny < 0 || nx >= N || ny >= M) continue;
+                if(!visited[nx][ny] && map[nx][ny] == 0) {
+                    visited[nx][ny] = true;
+                    ans = map[nx][ny] = map[node.x][node.y] + 1;
+                    que.add(new Node(nx, ny));
+                    cnt--;
                 }
             }
-            return max - 1;
         }
     }
+}
 
-    public static boolean checkZero() {
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < m; j++) {
-                if(store[i][j] == 0) {
-                    return true;
-                }
-            }
-        }
-        return false;
+class Node {
+    int x;
+    int y;
+    public Node(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 }
