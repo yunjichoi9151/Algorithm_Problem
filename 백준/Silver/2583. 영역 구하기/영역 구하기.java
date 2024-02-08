@@ -25,7 +25,6 @@ public class Main {
         K = Integer.parseInt(st.nextToken());
         map = new int[M][N];
         visited = new boolean[M][N];
-        int cnt = 0;
         for(int t = 0; t < K; t++) {
             st = new StringTokenizer(br.readLine());
             int x1 = Integer.parseInt(st.nextToken());
@@ -42,12 +41,11 @@ public class Main {
             for(int j = 0; j < N; j++) {
                 if(map[i][j] == 0 && !visited[i][j]) {
                     ans.add(BFS(i, j));
-                    cnt++;
                 }
             }
         }
         Collections.sort(ans);
-        System.out.println(cnt);
+        System.out.println(ans.size());
         for(int i = 0; i < ans.size(); i++) {
             System.out.print(ans.get(i) + (i == ans.size() - 1 ? "" : " "));
         } 
