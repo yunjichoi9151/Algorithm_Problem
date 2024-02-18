@@ -48,14 +48,15 @@ public class Main {
     }
 
     private static void printPath(Node node) {
+        StringBuilder sb = new StringBuilder();
         Stack<Integer> stack = new Stack<>();
         while (node != null) {
             stack.push(node.x);
             node = node.prev;
         }
         while (!stack.isEmpty()) {
-            System.out.print(stack.pop() + " ");
+            sb.append(stack.pop() + " ");
         }
-        System.out.println();
+        System.out.println(sb.toString().trim());
     }
 }
