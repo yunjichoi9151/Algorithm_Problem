@@ -1,73 +1,63 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    static int w, h, cnt;
+    static int W, H;
     static int[][] map;
-    static boolean[][] visit;
-    static Queue<Node> queue;
-    static int[] dy = { -1, -1, -1, 0, 1, 1, 1, 0 };
-    static int[] dx = { -1, 0, 1, 1, 1, 0, -1, -1 };
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        while (true) {
-            w = sc.nextInt();
-            h = sc.nextInt();
-            map = new int[h][w];
-            visit = new boolean[h][w];
-            if (w == 0 && h == 0) {
-                break;
-            }
-            for (int i = 0; i < h; i++) {
-                for (int j = 0; j < w; j++) {
-                    map[i][j] = sc.nextInt();
-                }
-            }
-            bfs();
-            System.out.println(cnt);
-            cnt = 0;
+    static boolean[][] visited;
+    static class Node {
+        int x;
+        int y;
+        public Node(int x, int y) {
+            this.x = x;
+            this.y = y;
         }
-        sc.close();
     }
-
-    public static void bfs() {
-        for (int i = 0; i < h; i++) {
-            for (int j = 0; j < w; j++) {
-                if (map[i][j] != 1 || visit[i][j]) {
-                    continue;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        while(true) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            W = Integer.parseInt(st.nextToken());
+            H = Integer.parseInt(st.nextToken());
+            if(W == 0 && H == 0) break;
+            map = new int[H][W];
+            visited = new boolean[H][W];
+            int cnt = 0;
+            for(int i = 0; i < H; i++) {
+                st = new StringTokenizer(br.readLine());
+                for(int j = 0; j < W; j++) {
+                    map[i][j] = Integer.parseInt(st.nextToken());
                 }
-                queue = new LinkedList<Node>();
-                visit[i][j] = true;
-                queue.add(new Node(i, j));
-                while (!queue.isEmpty()) {
-                    Node tmp = queue.poll();
-                    for (int k = 0; k < 8; k++) {
-                        int ty = tmp.y + dy[k];
-                        int tx = tmp.x + dx[k];
-                        if (ty < 0 || ty >= h || tx < 0 || tx >= w) {
-                            continue;
-                        }
-                        if (map[ty][tx] == 0 || visit[ty][tx]) {
-                            continue;
-                        }
-                        visit[ty][tx] = true;
-                        queue.add(new Node(ty, tx));
+            }
+            for(int i = 0; i < H; i++) {
+                for(int j = 0; j < W; j++) {
+                    if(map[i][j] == 1 && !visited[i][j]) {
+                        BFS(i, j);
+                        cnt++;
                     }
                 }
-                cnt++;
             }
+            sb.append(cnt + "\n");
         }
+        System.out.println(sb.toString().trim());
     }
 
-    public static class Node {
-        int y;
-        int x;
-
-        Node(int y, int x) {
-            this.y = y;
-            this.x = x;
+    static void BFS(int x, int y) {
+        int[] dx = {-1, 1, 0, 0, 1, 1, -1, -1};
+        int[] dy = {0, 0, -1, 1, 1, -1, 1, -1};
+        Queue<Node> que = new LinkedList<Node>();
+        que.add(new Node(x, y));
+        visited[x][y] = true;
+        while(!que.isEmpty()) {
+            Node node = que.poll();
+            for(int i = 0; i < 8; i++) {
+                int nx = node.x + dx[i];
+                int ny = node.y + dy[i];
+                if(nx < 0 || ny < 0 || nx >= H || ny >= W || visited[nx][ny] || map[nx][ny] == 0) continue;
+                que.add(new Node(nx, ny));
+                visited[nx][ny] = true;
+            }
         }
     }
 }
