@@ -3,8 +3,7 @@ import java.util.*;
 
 public class Main {
     static class Node {
-        int x;
-        int y;
+        int x, y;
         public Node(int x, int y) {
             this.x = x;
             this.y = y;
@@ -18,9 +17,9 @@ public class Main {
         int[][] map = new int[N][M];
         int[][] dis = new int[N][M];
         Queue<Node> que = new LinkedList<Node>();
-        int[] dx = {-1, 1, 0, 0, -1, -1, 1, 1};
-        int[] dy = {0, 0, -1, 1, -1, 1, -1, 1};
-        int ans = 0;
+        int[] dx = {-1, -1, -1, 0, 1, 1, 1, 0};
+        int[] dy = {-1, 0, 1, 1, 1, 0, -1, -1};
+        int answer = 0;
         for(int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
             for(int j = 0; j < M; j++) {
@@ -35,10 +34,10 @@ public class Main {
                 int ny = node.y + dy[i];
                 if(nx < 0 || ny < 0 || nx >= N || ny >= M || dis[nx][ny] != 0 || map[nx][ny] == 1) continue;
                 dis[nx][ny] = dis[node.x][node.y] + 1;
-                ans = Math.max(ans, dis[nx][ny]);
+                answer = Math.max(answer, dis[nx][ny]);
                 que.add(new Node(nx, ny));
             }
         }
-        System.out.println(ans);
+        System.out.println(answer);
     }
 }
