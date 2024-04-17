@@ -1,39 +1,44 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    static int[][] arr;
+    static int[][] graph;
     static boolean[] visited;
-    static int n, cnt;
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        int m = sc.nextInt();
-        arr = new int[n + 1][n + 1];
-        visited = new boolean[n + 1];
-        for(int i = 0; i < m; i++) {
-            int u = sc.nextInt();
-            int v = sc.nextInt();
-            arr[u][v] = 1;
-            arr[v][u] = 1;
+    static int N, M;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = stoi(st.nextToken());
+        M = stoi(st.nextToken());
+        graph = new int[N + 1][N + 1];
+        visited = new boolean[N + 1];
+        int answer = 0;
+        for(int i = 0; i < M; i++) {
+            st = new StringTokenizer(br.readLine());
+            int a = stoi(st.nextToken());
+            int b = stoi(st.nextToken());
+            graph[a][b] = graph[b][a] = 1;
         }
-        cnt = 0;
-        for(int i = 1; i <= n; i++) {
+        for(int i = 1; i <= N; i++) {
             if(!visited[i]) {
-                DFS(i);
-                cnt++;
+                dfs(i);
+                answer++;
             }
         }
-        System.out.println(cnt);
-        sc.close();
+        System.out.println(answer);
     }
 
-    public static void DFS(int v) {
-        if(visited[v]) return;
-        visited[v] = true;
-        for(int i = 1; i <= n; i++) {
-            if(arr[v][i] == 1) {
-                DFS(i);
+    static void dfs(int n) {
+        if(visited[n]) return;
+        visited[n] = true;
+        for(int i = 1; i <= N; i++) {
+            if(graph[n][i] == 1) {
+                dfs(i);
             }
         }
+    }
+
+    static int stoi(String s) {
+        return Integer.parseInt(s);
     }
 }
