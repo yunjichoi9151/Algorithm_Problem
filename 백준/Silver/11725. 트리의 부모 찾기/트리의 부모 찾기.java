@@ -1,46 +1,46 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    static ArrayList<Integer>[] tree;
-    static boolean[] visit;
-    static int[] parents;
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        tree = new ArrayList[n + 1];
-
-        for(int i = 1; i <= n; i++) {
-            tree[i] = new ArrayList<>();
+    static int N;
+    static int[] parent;
+    static boolean[] visited;
+    static ArrayList<Integer>[] list;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(br.readLine());
+        list = new ArrayList[N + 1];
+        parent = new int[N + 1];
+        visited = new boolean[N + 1];
+        for(int i = 0; i < N + 1; i++) {
+            list[i] = new ArrayList<Integer>();
+        }
+        for(int i = 0; i < N - 1; i++) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int a = stoi(st.nextToken());
+            int b = stoi(st.nextToken());
+            list[a].add(b);
+            list[b].add(a);
         }
 
-        for(int i = 1; i < n; i++) {
-            int n1 = sc.nextInt();
-            int n2 = sc.nextInt();
-            tree[n1].add(n2);
-            tree[n2].add(n1);
+        dfs(1);
+
+        for(int i = 2; i < parent.length; i++) {
+            System.out.println(parent[i]);
         }
-        
-        visit = new boolean[n + 1];
-        parents = new int[n + 1];
-        Queue<Integer> queue = new LinkedList<Integer>();
-        queue.add(1);
-        visit[1] = true;
-        while(queue.isEmpty() == false) {
-            int x = queue.poll();
-            for(int i : tree[x]) {
-                if(visit[i] == false) {
-                    visit[i] = true;
-                    queue.add(i);
-                    parents[i] = x;
-                }
+    }
+
+    static void dfs(int idx) {
+        visited[idx] = true;
+        for(int i : list[idx]) {
+            if(!visited[i]) {
+                parent[i] = idx;
+                dfs(i);
             }
         }
+    }
 
-        for(int i = 2; i <= n; i++) {
-            System.out.println(parents[i]);
-        }
+    static int stoi(String s) {
+        return Integer.parseInt(s);
     }
 }
