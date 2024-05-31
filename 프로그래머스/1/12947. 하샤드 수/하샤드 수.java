@@ -1,10 +1,10 @@
 class Solution {
     public boolean solution(int x) {
         int sum = 0;
-        int origin = x;
-        while(origin > 0) {
-            sum += origin % 10;
-            origin /= 10;
+        int num = x;
+        while(num > 0) {
+            sum += num % 10;
+            num /= 10;
         }
         return x % sum == 0;
     }
