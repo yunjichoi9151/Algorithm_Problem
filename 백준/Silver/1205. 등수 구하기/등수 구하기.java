@@ -23,7 +23,7 @@ public class Main {
                     else if(entry.getKey() == Score) System.out.println(answer);
                 }
             }
-            else if(P == 0 || (N == P && map.lastKey() >= Score)) {
+            else if(N == P && map.lastKey() >= Score) {
                 System.out.println(-1);
             } else {
                 for(Map.Entry<Integer, Integer> entry : map.entrySet()) {
@@ -34,7 +34,7 @@ public class Main {
                     }
                 }
             }
-        } else if(N == 0 && P != 0) System.out.println(1);
+        } else System.out.println(1);
     }
 
     static int stoi(String s) {
