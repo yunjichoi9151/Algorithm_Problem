@@ -8,7 +8,7 @@ public class Main {
         int[] cost = new int[N];
         int[] dis = new int[N - 1];
         int before = Integer.MAX_VALUE;
-        int sum = 0;
+        long sum = 0;
         StringTokenizer st = new StringTokenizer(br.readLine());
         for(int i = 0; i < N - 1; i++) {
             dis[i] = stoi(st.nextToken());
@@ -21,7 +21,7 @@ public class Main {
             } else if(before > cost[i]) {
                 before = cost[i];
             }
-            if(i != N - 1) sum += cost[i] * dis[i];
+            if(i != N - 1) sum += (long)cost[i] * dis[i];
         }
         System.out.println(sum);
     }
