@@ -29,7 +29,8 @@ public class Main {
         while(!que.isEmpty()) {
             Node node = que.poll();
             if(node.x == N - 1 && node.y == M - 1) {
-                answer = Math.min(answer, node.cnt);
+                System.out.println(node.cnt);
+                break;
             }
             for(int i = 0; i < 4; i++) {
                 int nx = node.x + dx[i];
@@ -39,7 +40,6 @@ public class Main {
                 visited[nx][ny] = true;
             }
         }
-        System.out.println(answer);
     }
 
     static int stoi(String S) {
