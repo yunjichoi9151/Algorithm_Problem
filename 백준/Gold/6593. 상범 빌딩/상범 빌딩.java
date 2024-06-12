@@ -2,73 +2,69 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static int L, R, C;
     static class Node {
-        int h;
-        int x;
-        int y;
-        int time;
-        public Node(int h, int x, int y, int time) {
-            this.h = h;
+        int x, y, z, time;
+        public Node(int x, int y, int z, int time) {
             this.x = x;
             this.y = y;
+            this.z = z;
             this.time = time;
         }
     }
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        while (true) {
-            String line = br.readLine().trim();
-            if(line.equals("0 0 0")) break;
-            StringTokenizer st = new StringTokenizer(line);
-            L = Integer.parseInt(st.nextToken());
-            R = Integer.parseInt(st.nextToken());
-            C = Integer.parseInt(st.nextToken());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int L = stoi(st.nextToken());
+        int R = stoi(st.nextToken());
+        int C = stoi(st.nextToken());
+        while(L != 0 && R != 0 && C != 0) {
             char[][][] map = new char[L][R][C];
             boolean[][][] visited = new boolean[L][R][C];
-            int[] start = new int[3];
-            int[] dh = {0, 0, 0, 0, 1, -1};
-            int[] dx = {0, 0, 1, -1, 0, 0};
-            int[] dy = {1, -1, 0, 0, 0, 0};
-            int ans = 0;
-            for (int k = 0; k < L; k++) {
-                for (int i = 0; i < R; i++) {
-                    String row = br.readLine();
-                    for (int j = 0; j < C; j++) {
-                        map[k][i][j] = row.charAt(j);
-                        if (map[k][i][j] == 'S') {
-                            start[0] = k;
-                            start[1] = i;
-                            start[2] = j;
+            int[] goal = new int[3];
+            int[] dx = {-1, 1, 0, 0, 0, 0};
+            int[] dy = {0, 0, -1, 1, 0, 0};
+            int[] dz = {0, 0, 0, 0, -1, 1};
+            Queue<Node> que = new LinkedList<>();
+            for(int i = 0; i < L; i++) {
+                for(int j = 0; j < R; j++) {
+                    String s = br.readLine();
+                    for(int k = 0; k < C; k++) {
+                        map[i][j][k] = s.charAt(k);
+                        if(map[i][j][k] == 'S') {
+                            que.add(new Node(i, j, k, 0));
+                            visited[i][j][k] = true;
                         }
                     }
                 }
-                br.readLine();
+                String tmp = br.readLine();
             }
-            Queue<Node> que = new LinkedList<>();
-            que.add(new Node(start[0], start[1], start[2], 0));
-            visited[start[0]][start[1]][start[2]] = true;
-            outerLoop:
-            while (!que.isEmpty()) {
+            int answer = -1;
+            while(!que.isEmpty()) {
                 Node node = que.poll();
-                for (int i = 0; i < 6; i++) {
-                    int nh = node.h + dh[i];
+                if(map[node.x][node.y][node.z] == 'E') {
+                    answer = node.time;
+                    break;
+                }
+                for(int i = 0; i < 6; i++) {
                     int nx = node.x + dx[i];
                     int ny = node.y + dy[i];
-                    if (nh < 0 || nx < 0 || ny < 0 || nh >= L || nx >= R || ny >= C
-                        || visited[nh][nx][ny] || map[nh][nx][ny] == '#') continue;
-                    if (map[nh][nx][ny] == 'E') {
-                        ans = node.time + 1;
-                        break outerLoop;
-                    }
-                    que.add(new Node(nh, nx, ny, node.time + 1));
-                    visited[nh][nx][ny] = true;
+                    int nz = node.z + dz[i];
+                    if(nx < 0 || ny < 0 || nz < 0 || nx >= L || ny >= R || nz >= C || map[nx][ny][nz] == '#' || visited[nx][ny][nz]) continue;
+                    que.add(new Node(nx, ny, nz, node.time + 1));
+                    visited[nx][ny][nz] = true;
                 }
             }
-            sb.append((ans == 0 ? "Trapped!" : "Escaped in " + ans + " minute(s).") + "\n");
+            sb.append((answer == -1 ? "Trapped!" : ("Escaped in " + answer + " minute(s).")) + "\n");
+            st = new StringTokenizer(br.readLine());
+            L = stoi(st.nextToken());
+            R = stoi(st.nextToken());
+            C = stoi(st.nextToken());
         }
         System.out.println(sb.toString().trim());
+    }
+
+    static int stoi(String S) {
+        return Integer.parseInt(S);
     }
 }
