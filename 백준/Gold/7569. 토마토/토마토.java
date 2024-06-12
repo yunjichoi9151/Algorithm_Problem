@@ -3,72 +3,60 @@ import java.util.*;
 
 public class Main {
     static class Node {
-        int h;
-        int x;
-        int y;
-        int day;
-        public Node(int h, int x, int y, int day) {
-            this.h = h;
+        int x, y, z, day;
+        public Node(int x, int y, int z, int day) {
             this.x = x;
             this.y = y;
+            this.z = z;
             this.day = day;
         }
     }
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        Queue<Node> que = new LinkedList<Node>();
-        int M = Integer.parseInt(st.nextToken());
-        int N = Integer.parseInt(st.nextToken());
-        int H = Integer.parseInt(st.nextToken());
-        int[][][] tomato = new int[H][N][M];
-        boolean[][][] visited = new boolean[H][N][M];
-        int[] arr = new int[3];
-        int[] dh = {1, -1, 0, 0, 0, 0};
-        int[] dx = {0, 0, 0, 0, 1, -1};
+        int M = stoi(st.nextToken());
+        int N = stoi(st.nextToken());
+        int H = stoi(st.nextToken());
+        int[][][] map = new int[H][N][M];
+        Queue<Node> que = new LinkedList<>();
+        int[] dx = {-1, 1, 0, 0, 0, 0};
         int[] dy = {0, 0, -1, 1, 0, 0};
-        int ans = -1;
-        for(int h = 0; h < H; h++) {
-            for(int i = 0; i < N; i++) {
+        int[] dz = {0, 0, 0, 0, -1, 1};
+        int zero_cnt = 0;
+        for(int i = 0; i < H; i++) {
+            for(int j = 0; j < N; j++) {
                 st = new StringTokenizer(br.readLine());
-                for(int j = 0; j < M; j++) {
-                    int n = Integer.parseInt(st.nextToken());
-                    tomato[h][i][j] = n;
-                    arr[n + 1]++;
-                    if(n == 1) {
-                        que.add(new Node(h, i, j, 0));
-                        visited[h][i][j] = true;
-                    }
+                for(int k = 0; k < M; k++) {
+                    map[i][j][k] = stoi(st.nextToken());
+                    if (map[i][j][k] == 0) zero_cnt++;
+                    else if(map[i][j][k] == 1) que.add(new Node(i, j, k, 0));
                 }
             }
         }
-        if(arr[2] == 0) {
-            System.out.println(-1);
-            return;
-        } else if(arr[2] + arr[0] == M * N * H) {
+        if(zero_cnt == 0) {
             System.out.println(0);
             return;
         }
-        outerLoop:
+        int answer = -1;
         while(!que.isEmpty()) {
             Node node = que.poll();
             for(int i = 0; i < 6; i++) {
-                int nh = node.h + dh[i];
                 int nx = node.x + dx[i];
                 int ny = node.y + dy[i];
-                if(arr[1] == 0) {
-                    ans = node.day + 1;
-                    break outerLoop;
-                }
-                if(nh < 0 || nx < 0 || ny < 0 || nh >= H || nx >= N || ny >= M
-                    || visited[nh][nx][ny] || tomato[nh][nx][ny] == -1) continue;
-                arr[2]++;
-                arr[1]--;
-                que.add(new Node(nh, nx, ny, node.day + 1));
-                visited[nh][nx][ny] = true;
+                int nz = node.z + dz[i];
+                if(nx < 0 || ny < 0 || nz < 0 || nx >= H || ny >= N || nz >= M || map[nx][ny][nz] != 0) continue;
+                que.add(new Node(nx, ny, nz, node.day + 1));
+                map[nx][ny][nz] = 1;
+                zero_cnt--;
+            }
+            if(zero_cnt == 0) {
+                answer = node.day + 1;
+                break;
             }
         }
-        System.out.println(ans);
+        System.out.println(answer);
+    }
+    static int stoi(String S) {
+        return Integer.parseInt(S);
     }
 }
