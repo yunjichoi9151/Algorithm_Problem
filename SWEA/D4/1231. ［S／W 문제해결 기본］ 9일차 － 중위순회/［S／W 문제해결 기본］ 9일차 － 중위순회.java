@@ -1,33 +1,32 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Solution {
-    public static char tree[];
-    public static int n;
-
-    public static void inOrder(int now) {
-        if(now > n) {
-            return;
-        }
-        inOrder(now * 2);
-        System.out.print(tree[now]);
-        inOrder(now * 2 + 1);
-    }
-    public static void main(String[] args) throws Exception {
+    static int N;
+    static char[] tree;
+    static StringBuilder sb = new StringBuilder();
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
+        StringTokenizer st = null;
         for(int tc = 1; tc <= 10; tc++) {
-            n = Integer.parseInt(br.readLine());
-            tree = new char[n + 1];
-            for(int i = 1; i <= n; i++) {
+            sb.append("#" + tc + " ");
+            N = Integer.parseInt(br.readLine());
+            tree = new char[N + 1];
+            for(int i = 1; i <= N; i++) {
                 st = new StringTokenizer(br.readLine());
-                int node = Integer.parseInt(st.nextToken());
-                tree[node] = st.nextToken().charAt(0);
+                st.nextToken();
+                tree[i] = st.nextToken().charAt(0);
             }
-            System.out.print("#" + tc + " ");
             inOrder(1);
-            System.out.println();
+            sb.append("\n");
         }
+        System.out.println(sb.toString().trim());
+    }
+
+    static void inOrder(int idx) {
+        if(idx > N) return;
+        inOrder(idx * 2);
+        sb.append(tree[idx]);
+        inOrder(idx * 2 + 1);
     }
 }
