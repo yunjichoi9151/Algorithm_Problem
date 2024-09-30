@@ -1,20 +1,16 @@
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String s = sc.nextLine();
-        char[] arr = s.toCharArray();
-        int cnt = 1;
-        for(int i = 0; i < arr.length; i++) {
-            if(arr[i] == ' ') {
-                if(i > 0 && i < arr.length - 1 && arr[i - 1] != ' ' && arr[i + 1] != ' ') {
-                    cnt++;
-                } else if((i > 0 && arr[i - 1] != ' ') || (i < arr.length - 1 && arr[i + 1] != ' ')) {
-                    continue;
-                } else {
-                    cnt = 0;
-                }
+        int cnt = 0;
+        ArrayList<String> arr = new ArrayList<>(Arrays.asList(s.split(" ")));
+        for(int i = 0; i < arr.size(); i++) {
+            if(arr.get(i).isEmpty() == false) {
+                cnt++;
             }
         }
         System.out.println(cnt);
