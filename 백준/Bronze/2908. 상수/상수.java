@@ -1,13 +1,14 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n1 = sc.nextInt();
-        int n2 = sc.nextInt();
-        n1 = n1 % 10 * 100 + (n1 % 100 - n1 % 10) + n1 / 100;
-        n2 = n2 % 10 * 100 + (n2 % 100 - n2 % 10) + n2 / 100;
-        System.out.println(Math.max(n1, n2));
-        sc.close();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int A = Integer.parseInt(st.nextToken());
+        int B = Integer.parseInt(st.nextToken());
+        A = (A / 100) + (A % 100) / 10 * 10 + (A % 10) * 100;
+        B = (B / 100) + (B % 100) / 10 * 10 + (B % 10) * 100;
+        System.out.println(A > B ? A : B);
     }
 }
