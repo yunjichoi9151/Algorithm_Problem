@@ -1,24 +1,22 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String s = sc.next();
-        char[] arr = s.toCharArray();
-        int sum = 0;
-        for(int i = 0; i < arr.length; i++) {
-            int tmp = (int)arr[i];
-            if(tmp < 80) {
-                sum += ((int)arr[i] - 65) / 3 + 3;
-            } else if(tmp >= 80 && tmp < 84) {
-                sum += 8;
-            } else if(tmp >= 84 && tmp < 87) {
-                sum += 9;
-            } else {
-                sum += 10;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        char[][] arr = { { 'A', 'B', 'C' }, { 'D', 'E', 'F' }, { 'G', 'H', 'I' }, { 'J', 'K', 'L' }, { 'M', 'N', 'O' },
+                { 'P', 'Q', 'R', 'S' }, { 'T', 'U', 'V' }, { 'W', 'X', 'Y', 'Z' } };
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (int i = 0; i <= 7; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                map.put(arr[i][j], i + 3);
             }
         }
-        System.out.println(sum);
-        sc.close();
+        char[] str = br.readLine().toCharArray();
+        int ans = 0;
+        for (int i = 0; i < str.length; i++) {
+            ans += map.get(str[i]);
+        }
+        System.out.println(ans);
     }
 }

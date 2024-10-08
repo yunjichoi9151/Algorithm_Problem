@@ -4,17 +4,21 @@
 
 ### 성능 요약
 
-메모리: 30840 KB, 시간: 68 ms
+메모리: 14232 KB, 시간: 104 ms
 
 ### 분류
 
-구현(implementation)
+구현
+
+### 제출 일자
+
+2024년 10월 8일 23:54:14
 
 ### 문제 설명
 
 <p>상근이의 할머니는 아래 그림과 같이 오래된 다이얼 전화기를 사용한다.</p>
 
-<p style="text-align: center;"><img alt="" src="" style="width: 267px; height: 265px;"></p>
+<p style="text-align: center;"><img alt="" src="https://u.acmicpc.net/9c88dd24-3a4c-4a09-bc50-e6496958214d/Screen%20Shot%202021-06-16%20at%2012.48.39%20AM.png" style="width: 267px; height: 265px;"></p>
 
 <p>전화를 걸고 싶은 번호가 있다면, 숫자를 하나를 누른 다음에 금속 핀이 있는 곳 까지 시계방향으로 돌려야 한다. 숫자를 하나 누르면 다이얼이 처음 위치로 돌아가고, 다음 숫자를 누르려면 다이얼을 처음 위치에서 다시 돌려야 한다.</p>
 
