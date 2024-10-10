@@ -1,19 +1,24 @@
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
-        for(int tc = 0; tc < t; tc++) {
-            int c = sc.nextInt();
-            System.out.print(c / 25 + " ");
-            c %= 25;
-            System.out.print(c / 10 + " ");
-            c %= 10;
-            System.out.print(c / 5 + " ");
-            c %= 5;
-            System.out.println(c);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int T = stoi(br.readLine());
+        for (int tc = 0; tc < T; tc++) {
+            int N = stoi(br.readLine());
+            sb.append(N / 25 + " ");
+            N -= 25 * (N / 25);
+            sb.append(N / 10 + " ");
+            N -= 10 * (N / 10);
+            sb.append(N / 5 + " ");
+            N -= 5 * (N / 5);
+            sb.append(N + "\n");
         }
-        sc.close();
+        System.out.println(sb.toString().trim());
+    }
+
+    static int stoi(String S) {
+        return Integer.parseInt(S);
     }
 }
