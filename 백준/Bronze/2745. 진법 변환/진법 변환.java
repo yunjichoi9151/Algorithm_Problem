@@ -1,16 +1,12 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        String s = sc.next();
-        int n = sc.nextInt();
-        int ans = 0;
-        for(int i = 0; i < s.length(); i++) {
-            int tmp = s.charAt(i);
-                ans += (tmp - (tmp <= 57 ? 48 : 55)) * Math.pow(n, (s.length() - i - 1));
-        }
-        System.out.println(ans);
-        sc.close();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        String S = st.nextToken();
+        int N = Integer.parseInt(st.nextToken());
+        System.out.println(Integer.parseInt(S, N));
     }
 }
