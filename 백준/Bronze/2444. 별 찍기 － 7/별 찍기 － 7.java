@@ -1,33 +1,28 @@
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        for(int i = 0; i < 2 * n - 1; i++) {
-            for(int j = 0; j < 2 * n - 1; j++) {
-                if(i < n - 1) {
-                    if(j < n - 1 - i) {
-                        System.out.print(" ");
-                    } else if(j > n + i - 1) {
-                        break;
-                    } else {
-                        System.out.print("*");
-                    }
-                } else if(i == n - 1) {
-                    System.out.print("*");
-                } else {
-                    if(j <= i - n) {
-                        System.out.print(" ");
-                    } else if(j >= (2 * n - 2) - i + n) {
-                        break;
-                    } else {
-                        System.out.print("*");
-                    }
-                }
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int N = Integer.parseInt(br.readLine());
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N - i - 1; j++) {
+                sb.append(" ");
             }
-            System.out.println();
+            for (int j = 0; j < 2 * i + 1; j++) {
+                sb.append("*");
+            }
+            if(i != N - 1) sb.append("\n");
         }
-        sc.close();
+        for (int i = N - 2; i >= 0; i--) {
+            sb.append("\n");
+            for (int j = 0; j < N - i - 1; j++) {
+                sb.append(" ");
+            }
+            for (int j = 0; j < 2 * i + 1; j++) {
+                sb.append("*");
+            }
+        }
+        System.out.println(sb.toString());
     }
 }
