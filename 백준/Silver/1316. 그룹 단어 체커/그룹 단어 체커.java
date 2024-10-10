@@ -1,30 +1,28 @@
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int cnt = 0;
-        for(int tc = 1; tc <= n; tc++) {
-            String s = sc.next();
-            boolean check[] = new boolean[26];
-            Boolean result = true;
-            for(int i = 0; i < s.length(); i++) {
-                int idx = s.charAt(i) - 'a';
-                if(check[idx]) {
-                    if(s.charAt(i) != s.charAt(i - 1)) {
-                        result = false;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        int ans = 0;
+        for (int i = 0; i < N; i++) {
+            String S = br.readLine();
+            boolean[] isIn = new boolean[26];
+            boolean Possible = true;
+            for (int j = 0; j < S.length(); j++) {
+                int num = S.charAt(j) - 'a';
+                if (!isIn[num]) {
+                    isIn[num] = true;
+                } else {
+                    if (S.charAt(j - 1) != S.charAt(j)) {
+                        Possible = false;
                         break;
                     }
                 }
-                else {
-                    check[idx] = true;
-                }
             }
-            if(result) {
-                cnt++;
-            }
+            if (Possible)
+                ans++;
         }
-        System.out.println(cnt);
+        System.out.println(ans);
     }
 }
