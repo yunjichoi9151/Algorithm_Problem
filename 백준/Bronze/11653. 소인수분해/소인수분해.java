@@ -1,25 +1,25 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        if(n != 1) {
-            ArrayList<Integer> arr = new ArrayList<>();
-            int num = 2;
-            while(n > 1) {
-                if(n % num == 0) {
-                    n /= num;
-                    arr.add(num);
-                } else {
-                    num++;
-                }
-            }
-            for(int i = 0; i < arr.size(); i++) {
-                System.out.println(arr.get(i));
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int N = Integer.parseInt(br.readLine());
+        if (N == 1)
+            return;
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        for (int i = 2; i <= N; i++) {
+            if (N % i == 0)
+                list.add(i);
+        }
+        for (int i = 0; i < list.size(); i++) {
+            int tmp = list.get(i);
+            while (N % tmp == 0) {
+                N /= tmp;
+                sb.append(tmp + "\n");
             }
         }
-        sc.close();
+        System.out.println(sb.toString().trim());
     }
 }
