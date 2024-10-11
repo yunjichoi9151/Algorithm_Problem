@@ -1,23 +1,21 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int k = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
         int cnt = 0;
-        for(int i = 1; i <= n; i++) {
-            if(n % i == 0) {
+        for (int i = 1; i <= N; i++) {
+            if (N % i == 0)
                 cnt++;
-            }
-            if(cnt == k) {
+            if (K == cnt) {
                 System.out.println(i);
-                break;
+                return;
             }
         }
-        if(cnt < k) {
-            System.out.println(0);
-        }
-        sc.close();
+        System.out.println(0);
     }
 }
