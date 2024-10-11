@@ -1,21 +1,26 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n1 = sc.nextInt();
-        int n2 = sc.nextInt();
-        while(n1 != 0 && n2 != 0) {
-            if(n2 % n1 == 0) {
-                System.out.println("factor");
-            } else if(n1 % n2 == 0) {
-                System.out.println("multiple");
-            } else {
-                System.out.println("neither");
-            }
-            n1 = sc.nextInt();
-            n2 = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        StringTokenizer st = null;
+        int a = -1;
+        int b = -1;
+        while (true) {
+            st = new StringTokenizer(br.readLine());
+            a = Integer.parseInt(st.nextToken());
+            b = Integer.parseInt(st.nextToken());
+            if (a == 0 && b == 0)
+                break;
+            if (a > b && a % b == 0)
+                sb.append("multiple\n");
+            else if (a < b && b % a == 0)
+                sb.append("factor\n");
+            else
+                sb.append("neither\n");
         }
-        sc.close();
+        System.out.println(sb.toString().trim());
     }
 }
