@@ -1,34 +1,44 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int[] arr1 = new int[n];
-        for(int i = 0; i < n; i++) {
-            arr1[i] = sc.nextInt();
+    static int[] arr;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int N = stoi(br.readLine());
+        arr = new int[N];
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < N; i++) {
+            arr[i] = stoi(st.nextToken());
         }
-        Arrays.sort(arr1);
-        int m = sc.nextInt();
-        for(int i = 0; i < m; i++) {
-            int result = 0, start = 0, end = arr1.length - 1;
-            int mid = (end + start) / 2;
-            int tmp = sc.nextInt();
-            while(end - start >= 0) {
-                if(arr1[mid] == tmp) {
-                    result = 1;
-                    break;
-                }
-                else if(arr1[mid] <= tmp) {
-                    start = mid + 1;
-                }
-                else {
-                    end = mid - 1;
-                }
-                mid = (end + start) / 2;
+        Arrays.sort(arr);
+        int M = stoi(br.readLine());
+        st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < M; i++) {
+            int num = stoi(st.nextToken());
+            sb.append((binarySearch(num) == -1 ? 0 : 1) + "\n");
+        }
+        System.out.println(sb.toString().trim());
+    }
+
+    static int stoi(String S) {
+        return Integer.parseInt(S);
+    }
+
+    static int binarySearch(int key) {
+        int left = 0;
+        int right = arr.length - 1;
+        while (left <= right) {
+            int mid = (left + right) / 2;
+            if (key < arr[mid]) {
+                right = mid - 1;
+            } else if (key > arr[mid]) {
+                left = mid + 1;
+            } else {
+                return mid;
             }
-            System.out.println(result);
         }
+        return -1;
     }
 }
