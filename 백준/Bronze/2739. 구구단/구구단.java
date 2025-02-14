@@ -1,12 +1,13 @@
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int N = Integer.parseInt(br.readLine());
         for(int i = 1; i <= 9; i++) {
-            System.out.println(n + " * " + i + " = " + (n * i));
+            sb.append(N + " * " + i + " = " + (N * i) + "\n");
         }
-        sc.close();
+        System.out.println(sb.toString().trim());
     }
 }
