@@ -1,21 +1,22 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int X = Integer.parseInt(st.nextToken());
-        st = new StringTokenizer(br.readLine());
         StringBuilder sb = new StringBuilder();
+        int N = stoi(st.nextToken());
+        int X = stoi(st.nextToken());
+        st = new StringTokenizer(br.readLine());
         for(int i = 0; i < N; i++) {
-            int num = Integer.parseInt(st.nextToken());
-            if(num < X) sb.append(num + " ");
+            int t = stoi(st.nextToken());
+            if(t < X) sb.append(t + " ");
         }
-        String ans = sb.toString();
-        System.out.println(ans.substring(0, ans.length() - 1));
+        System.out.println(sb.toString().trim());
+    }
+
+    static int stoi(String S) {
+        return Integer.parseInt(S);
     }
 }
