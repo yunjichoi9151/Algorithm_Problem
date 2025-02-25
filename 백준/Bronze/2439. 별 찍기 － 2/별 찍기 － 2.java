@@ -1,15 +1,19 @@
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
-                System.out.print((i + j + 1 >= n) ? "*" : " ");
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int N = Integer.parseInt(br.readLine());
+        for(int i = 0; i < N; i++) {
+            for(int j = 0; j < N - i - 1; j++) {
+                sb.append(' ');
             }
-            System.out.println();
+            for(int k = 0; k <= i; k++) {
+                sb.append('*');
+            }
+            sb.append('\n');
         }
-        sc.close();
+        System.out.print(sb.toString());
     }
 }
