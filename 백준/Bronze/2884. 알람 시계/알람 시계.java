@@ -1,13 +1,12 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int h = sc.nextInt();
-        int m = sc.nextInt();
-        int t = h * 60 + m - 45;
-        if(t < 0) t += 24 * 60;
-        System.out.println((t / 60) + " " + (t % 60));
-        sc.close();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int sum = Integer.parseInt(st.nextToken()) * 60 + Integer.parseInt(st.nextToken()) - 45;
+        if(sum < 0) sum = 24 * 60 + sum;
+        System.out.println((sum / 60) + " " + (sum % 60));
     }
 }
