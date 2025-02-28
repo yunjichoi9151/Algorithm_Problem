@@ -1,21 +1,17 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = Integer.parseInt(st.nextToken());
-        int max = Integer.MIN_VALUE;
-        int min = Integer.MAX_VALUE;
-        st = new StringTokenizer(br.readLine());
+        int[] ans = {Integer.MAX_VALUE, Integer.MIN_VALUE};
         for(int i = 0; i < N; i++) {
             int num = Integer.parseInt(st.nextToken());
-            max = Math.max(num, max);
-            min = Math.min(num, min);
+            if(num < ans[0]) ans[0] = num;
+            if(num > ans[1]) ans[1] = num;
         }
-        System.out.println(min + " " + max);
+        System.out.println(ans[0] + " " + ans[1]);
     }
 }
