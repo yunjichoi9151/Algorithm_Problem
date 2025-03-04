@@ -1,24 +1,23 @@
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
-        for(int tc = 1; tc <= t; tc++) {
-            String s = sc.next();
-            int tmp = 0;
-            int sum = 0;
-            for(int i = 0; i < s.length(); i++) {
-                char c = s.charAt(i);
-                if(c == 'O') {
-                    tmp++;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int T = Integer.parseInt(br.readLine());
+        for(int i = 0; i < T; i++) {
+            char[] arr = br.readLine().toCharArray();
+            int ans = 0;
+            int cnt = 0;
+            for(int j = 0; j < arr.length; j++) {
+                if(arr[j] == 'O') {
+                    ans += ++cnt;
                 } else {
-                    tmp = 0;
+                    cnt = 0;
                 }
-                sum += tmp;
             }
-            System.out.println(sum);
+            sb.append(ans + "\n");
         }
-        sc.close();
+        System.out.println(sb.toString().trim());
     }
 }
