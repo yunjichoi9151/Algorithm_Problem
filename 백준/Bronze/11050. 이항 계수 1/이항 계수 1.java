@@ -1,15 +1,23 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int k = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
         int ans = 1;
-        for(int i = 0; i < k; i++) {
-            ans = ans * (n - i) / (i + 1);
+        if(K == 0) {
+            System.out.println("1");
+            return;
+        } else if(N / 2 < K) K = N - K;
+        for(int i = 0; i < K; i++) {
+            ans = ans * (N - i);
+        }
+        for(int i = 0; i < K; i++) {
+            ans = ans / (K - i);
         }
         System.out.println(ans);
-        sc.close();
     }
 }
