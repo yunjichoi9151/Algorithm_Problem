@@ -1,26 +1,20 @@
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int tc = sc.nextInt();
-        int[][] arr = new int[15][15];
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int T = Integer.parseInt(br.readLine());
+        int[][] map = new int[15][14];
         for(int i = 0; i < 15; i++) {
-            arr[0][i] = i;
-            arr[i][1] = 1;
-        }
-        for(int i = 1; i < 15; i++) {
-            for(int j = 2; j < 15; j++) {
-                for(int r = 1; r <= j; r++) {
-                    arr[i][j] += arr[i - 1][r];
-                }
+            for(int j = 0; j < 14; j++) {
+                if(i == 0 || j == 0) map[i][j] = j + 1;
+                else map[i][j] = map[i - 1][j] + map[i][j - 1];
             }
         }
-        for(int t = 0; t < tc; t++) {
-            int k = sc.nextInt();
-            int n = sc.nextInt();
-            System.out.println(arr[k][n]);
+        for(int i = 0; i < T; i++) {
+            sb.append(map[Integer.parseInt(br.readLine())][Integer.parseInt(br.readLine()) - 1] + "\n");
         }
-        sc.close();
+        System.out.println(sb.toString().trim());
     }
 }
