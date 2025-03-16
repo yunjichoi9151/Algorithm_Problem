@@ -1,18 +1,17 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n1 = sc.nextInt(), n2 = sc.nextInt();
-        int max = 0;
-        for(int i = 1; i <= (n1 < n2 ? n1 : n2); i++) {
-            if(n1 % i == 0 && n2 % i == 0) {
-                if(max < i) {
-                    max = i;
-                }
-            }
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int A = Integer.parseInt(st.nextToken());
+        int B = Integer.parseInt(st.nextToken());
+        int min = Math.min(A, B);
+        int div = 0;
+        for(int i = 1; i <= min; i++) {
+            if(A % i == 0 && B % i == 0) div = i;
         }
-        System.out.println(max);
-        System.out.println((n1 / max) * (n2 / max) * max);
+        System.out.println(div + "\n" + (A * B / div));
     }
 }

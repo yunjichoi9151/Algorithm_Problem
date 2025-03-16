@@ -1,23 +1,21 @@
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int a = sc.nextInt();
-        int b = sc.nextInt();
-        int c = sc.nextInt();
-        int mul = a * b * c;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int A = Integer.parseInt(br.readLine());
+        int B = Integer.parseInt(br.readLine());
+        int C = Integer.parseInt(br.readLine());
+        int num = A * B * C;
         int[] arr = new int[10];
-        while(true) {
-            arr[mul % 10]++;
-            mul /= 10;
-            if(mul == 0) {
-                break;
-            }
+        while(num > 0) {
+            arr[num % 10]++;
+            num /= 10;
         }
         for(int i = 0; i < 10; i++) {
-            System.out.println(arr[i]);
+            sb.append(arr[i] + "\n");
         }
-        sc.close();
+        System.out.println(sb.toString().trim());
     }
 }
