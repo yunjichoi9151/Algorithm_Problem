@@ -1,47 +1,52 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 public class Main {
-    static class Node {
-        int x;
-        int y;
-        int move;
-        public Node(int x, int y, int move) {
-            this.x = x;
-            this.y = y;
-            this.move = move;
-        }
+  static class Node {
+    int x, y, cnt;
+    public Node(int x, int y, int cnt) {
+      this.x = x;
+      this.y = y;
+      this.cnt = cnt;
     }
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
-        int T = Integer.parseInt(br.readLine());
-        for(int t = 0; t < T; t++) {
-            int I = Integer.parseInt(br.readLine());
-            boolean[][] map = new boolean[I][I];
-            Queue<Node> que = new LinkedList<Node>();
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int[] start = {Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())};
-            que.add(new Node(start[0], start[1], 0));
-            st = new StringTokenizer(br.readLine());
-            int[] end = {Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken())};
-            int[] dx = {-1, -2, -2, -1, 1, 2, 2, 1};
-            int[] dy = {-2, -1, 1, 2, 2, 1, -1, -2};
-            while(!que.isEmpty()) {
-                Node node = que.poll();
-                if(node.x == end[0] && node.y == end[1]) {
-                    sb.append(node.move + "\n");
-                    break;
-                }
-                for(int i = 0; i < 8; i++) {
-                    int nx = node.x + dx[i];
-                    int ny = node.y + dy[i];
-                    if(nx < 0 || ny < 0 || nx >= I || ny >= I || map[nx][ny]) continue;
-                    que.add(new Node(nx, ny, node.move + 1));
-                    map[nx][ny] = true;
-                }
-            }
+  }
+  public static void main(String[] args) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    StringBuilder sb = new StringBuilder();
+    StringTokenizer st = null;
+    int T = stoi(br.readLine());
+    int[] dx = {-1, -2, -2, -1, 1, 2, 2, 1};
+    int[] dy = {-2, -1, 1, 2, 2, 1, -1, -2};
+    for(int tc = 0; tc < T; tc++) {
+      int l = stoi(br.readLine());
+      int[][] map = new int[l][l];
+      boolean[][] visited = new boolean[l][l];
+      st = new StringTokenizer(br.readLine());
+      int[] now = {stoi(st.nextToken()), stoi(st.nextToken())};
+      st = new StringTokenizer(br.readLine());
+      int[] goal = {stoi(st.nextToken()), stoi(st.nextToken())};
+      Queue<Node> que = new LinkedList<>();
+      que.add(new Node(now[0], now[1], 0));
+      visited[now[0]][now[1]] = true;
+      while(!que.isEmpty()) {
+        Node node = que.poll();
+        if(node.x == goal[0] && node.y == goal[1]) {
+          sb.append(node.cnt + "\n");
+          break;
         }
-        System.out.println(sb.toString().trim());
+        for(int i = 0; i < 8; i++) {
+          int nx = node.x + dx[i];
+          int ny = node.y + dy[i];
+          if(nx < 0 || ny < 0 || nx >= l || ny >= l || visited[nx][ny]) continue;
+          que.add(new Node(nx, ny, node.cnt + 1));
+          visited[nx][ny] = true;
+        }
+      }
     }
+    System.out.println(sb.toString().trim());
+  }
+
+  static int stoi(String S) {
+    return Integer.parseInt(S);
+  }
 }
