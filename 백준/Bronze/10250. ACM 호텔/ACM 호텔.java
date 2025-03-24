@@ -1,23 +1,21 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
-        int a = 0, b = 0;
-        for(int tc = 1; tc <= t; tc++) {
-            int h = sc.nextInt(), w = sc.nextInt(), n = sc.nextInt();
-            if(n % h != 0) {
-                a = n % h;
-                b = n / h + 1;
-            }
-            else if(n % h == 0) {
-                a = h;
-                b = n / h;
-            }
-            System.out.printf("%d%02d", a, b);
-            System.out.println();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        StringTokenizer st = null;
+        int T = Integer.parseInt(br.readLine());
+        for(int i = 0; i < T; i++) {
+            st = new StringTokenizer(br.readLine());
+            int H = Integer.parseInt(st.nextToken());
+            int W = Integer.parseInt(st.nextToken());
+            int N = Integer.parseInt(st.nextToken());
+            int x1 = N % H == 0 ? H : N - H * (N / H);
+            int x2 = N % H == 0 ? N / H :  N / H + 1;
+            sb.append(x1 * 100 + x2 + "\n");
         }
-        sc.close();
+        System.out.println(sb.toString().trim());
     }
 }

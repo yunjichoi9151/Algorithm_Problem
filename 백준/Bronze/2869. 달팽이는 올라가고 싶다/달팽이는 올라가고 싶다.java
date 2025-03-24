@@ -1,15 +1,13 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int a = sc.nextInt();
-        int b = sc.nextInt();
-        int v = sc.nextInt();
-        if((v - a) % (a - b) == 0) {
-            System.out.println(((v - a) / (a - b)) + 1);
-        } else {
-            System.out.println(((v - a) / (a - b)) + 2);
-        }
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int A = Integer.parseInt(st.nextToken());
+        int B = Integer.parseInt(st.nextToken());
+        int V = Integer.parseInt(st.nextToken());
+        System.out.println((V - B) % (A - B) == 0 ? (V - B) / (A - B) : (V - B) / (A - B) + 1);
     }
 }
