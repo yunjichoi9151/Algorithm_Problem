@@ -6,9 +6,9 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         StringBuilder sb = new StringBuilder();
-        int[] arr = { 1, 1, 2, 2, 2, 8 };
-        for (int i = 0; i < 6; i++) {
-            sb.append(arr[i] - Integer.parseInt(st.nextToken()) + " ");
+        int[] numbers = {1, 1, 2, 2, 2, 8};
+        for(int i = 0; i < 6; i++) {
+            sb.append((numbers[i] - Integer.parseInt(st.nextToken())) + " ");
         }
         System.out.println(sb.toString().trim());
     }
