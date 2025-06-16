@@ -1,34 +1,30 @@
-import java.util.Scanner;
-import java.util.Arrays;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
         int[] arr = new int[9];
-        int a = 0, b = 0, sum = 0;
+        int sum = 0;
         for(int i = 0; i < 9; i++) {
-            arr[i] = sc.nextInt();
+            arr[i] = Integer.parseInt(br.readLine());
             sum += arr[i];
         }
+        outerLoop:
         for(int i = 0; i < 8; i++) {
             for(int j = i + 1; j < 9; j++) {
-                if((sum - 100) - arr[i] == arr[j]) {
-                    a = arr[i];
-                    b = arr[j];
-                    break;
+                if(arr[i] + arr[j] + 100 == sum) {
+                    arr[i] = 0;
+                    arr[j] = 0;
+                    break outerLoop;
                 }
             }
         }
-        arr = removeElement(arr, a);
-        arr = removeElement(arr, b);
         Arrays.sort(arr);
-        for(int i = 0; i < 7; i++)
-            System.out.println(arr[i]);
-        sc.close();
-    }
-    public static int[] removeElement(int[] arr, int item) {
-        return Arrays.stream(arr)
-                .filter(i -> i != item)
-                .toArray();
+        for(int i = 2; i < 9; i++) {
+            sb.append(arr[i] + "\n");
+        }
+        System.out.println(sb.toString().trim());
     }
 }
