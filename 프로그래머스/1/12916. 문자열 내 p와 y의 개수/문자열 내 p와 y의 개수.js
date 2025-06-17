@@ -1,9 +1,9 @@
 function solution(s){
-    let answer = 0;
+    var answer = 0;
     s = s.toLowerCase();
-    for(let i = 0; i < s.length; i++) {
-        if(s[i] === 'p') answer++;
-        else if(s[i] === 'y') answer--;
+    for(let c of s) {
+        if(c === 'p') answer++;
+        else if(c === 'y') answer--;
     }
-    return answer === 0 ? true : false;
+    return answer === 0;
 }
