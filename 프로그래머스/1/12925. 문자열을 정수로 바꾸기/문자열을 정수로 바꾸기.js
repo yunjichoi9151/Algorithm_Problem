@@ -1,3 +1,3 @@
 function solution(s) {
-    return parseInt(s);
+    return Number(s);
 }
