@@ -3,7 +3,7 @@ function solution(x) {
     var tmp = x;
     while(tmp > 0) {
         answer += tmp % 10;
-        tmp = parseInt(tmp / 10);
+        tmp = Math.floor(tmp / 10);
     }
     return x % answer === 0;
 }
