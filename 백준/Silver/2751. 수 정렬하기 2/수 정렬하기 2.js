@@ -1,5 +1,12 @@
-const input = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(Number);
-const n = input[0];
-const arr = input.slice(1, n + 1);
+const input = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n');
+
+const n = +input[0];
+const arr = new Array(n);
+
+for (let i = 0; i < n; i++) {
+  arr[i] = +input[i + 1];
+}
+
 arr.sort((a, b) => a - b);
-console.log(arr.join('\n'));
+
+process.stdout.write(arr.join('\n'));
