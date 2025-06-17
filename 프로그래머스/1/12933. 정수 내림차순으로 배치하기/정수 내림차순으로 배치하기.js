@@ -1,14 +1,9 @@
 function solution(n) {
-    var answer = 0;
-    var arr = [];
-    var idx = 0;
+    const arr = [];
     while(n > 0) {
-        arr[idx++] = n % 10;
-        n = parseInt(n / 10);
+        arr.push(n % 10);
+        n = Math.floor(n / 10);
     }
-    arr.sort();
-    for(var i = 0; i < arr.length; i++) {
-        answer += arr[i] * Math.pow(10, i);
-    }
-    return answer;
+    arr.sort((a, b) => b - a);
+    return Number(arr.join(''));
 }
