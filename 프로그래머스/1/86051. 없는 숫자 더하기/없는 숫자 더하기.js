@@ -1,11 +1,8 @@
 function solution(numbers) {
+    const set = new Set(numbers);
     var answer = 45;
-    var num = [];
-    for(let n of numbers) {
-        if(!num.includes(n)) {
-            num.push(n);
-            answer -= n;
-        }
+    for(let n of set) {
+        answer -= n;
     }
     return answer;
 }
