@@ -1,9 +1,8 @@
 function solution(n, m) {
-    var answer = [];
-    const min = Math.min(n, m);
+    var min = Math.min(n, m);
+    var num = 0;
     for(var i = 1; i <= min; i++) {
-        if(n % i == 0 && m % i == 0) answer[0] = i;
+        if(n % i === 0 && m % i === 0) num = i;
     }
-    answer[1] = n * m / answer[0];
-    return answer;
+    return [num, n * m / num];
 }
