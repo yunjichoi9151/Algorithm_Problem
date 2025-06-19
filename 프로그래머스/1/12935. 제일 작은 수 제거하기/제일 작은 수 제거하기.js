@@ -1,9 +1,8 @@
 function solution(arr) {
-    var answer = [];
-    var min = Math.min(...arr);
-    var idx = 0;
-    for(var i = 0; i < arr.length; i++) {
-        if(arr[i] !== min) answer[idx++] = arr[i];
+    if(arr.length === 1) return [-1];
+    var min = Number.MAX_VALUE;
+    for(let n of arr) {
+        if(n < min) min = n;
     }
-    return answer.length === 0 ? [-1] : answer;
+    return arr.filter(num => num !== min);
 }
