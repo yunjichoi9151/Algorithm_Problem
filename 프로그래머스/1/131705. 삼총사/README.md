@@ -1,10 +1,10 @@
 # [level 1] 삼총사 - 131705 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/131705?language=javascript) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/131705) 
 
 ### 성능 요약
 
-메모리: 33.5 MB, 시간: 0.12 ms
+메모리: 33.5 MB, 시간: 0.17 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2023년 11월 0일 17:42:22
+2025년 06월 20일 09:28:34
 
 ### 문제 설명
 
