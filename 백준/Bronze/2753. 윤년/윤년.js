@@ -1,7 +1,2 @@
-var fs = require('fs');
-var input = fs.readFileSync('/dev/stdin').toString().trim();
-if ((input % 4 == 0 && input % 100 != 0) || input % 400 == 0) {
-  console.log(1);
-} else {
-  console.log(0);
-}
+const year = require('fs').readFileSync('/dev/stdin').toString();
+console.log((year % 400 === 0 || (year % 4 === 0 && year % 100 !== 0)) ? 1 : 0)
