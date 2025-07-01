@@ -1,11 +1,9 @@
-import java.util.*;
 import java.io.*;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        if(N % 400 == 0 || (N % 4 == 0 && N % 100 != 0)) System.out.println(1);
-        else System.out.println(0);
+        int y = Integer.parseInt(br.readLine());
+        System.out.println((y % 400 == 0 || (y % 4 == 0 && y % 100 != 0)) ? 1 : 0);
     }
 }
