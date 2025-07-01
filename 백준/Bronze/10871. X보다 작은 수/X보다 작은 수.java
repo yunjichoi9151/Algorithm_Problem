@@ -10,8 +10,8 @@ public class Main {
         int X = stoi(st.nextToken());
         st = new StringTokenizer(br.readLine());
         for(int i = 0; i < N; i++) {
-            int t = stoi(st.nextToken());
-            if(t < X) sb.append(t + " ");
+            int num = stoi(st.nextToken());
+            if(num < X) sb.append(num + " ");
         }
         System.out.println(sb.toString().trim());
     }
