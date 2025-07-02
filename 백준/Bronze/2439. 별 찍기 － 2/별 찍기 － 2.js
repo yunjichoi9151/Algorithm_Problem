@@ -1,13 +1,6 @@
-var fs = require('fs');
-var n = fs.readFileSync('/dev/stdin').toString().trim();
-for (var i = 0; i < n; i++) {
-  var tmp = '';
-  for (var j = 0; j < n; j++) {
-    if (j < n - i - 1) {
-      tmp += ' ';
-    } else {
-      tmp += '*';
-    }
-  }
-  console.log(tmp);
+const N = Number(require('fs').readFileSync('/dev/stdin').toString());
+const result = [];
+for(let i = 1; i <= N; i++) {
+  result[i - 1] = ' '.repeat(N - i) + '*'.repeat(i);
 }
+console.log(result.join('\n'));
