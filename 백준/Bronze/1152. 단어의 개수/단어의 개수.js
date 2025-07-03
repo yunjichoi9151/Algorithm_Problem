@@ -1,1 +1,2 @@
-console.log(require('fs').readFileSync('/dev/stdin').toString().trim().split(' ').filter(Boolean).length);
+const s = require('fs').readFileSync('/dev/stdin').toString().trim();
+console.log(s === "" ? 0 : s.split(' ').length);
