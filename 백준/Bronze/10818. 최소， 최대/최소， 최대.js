@@ -1,3 +1,3 @@
-const [line1, line2] = require("fs").readFileSync("/dev/stdin").toString().trim().split("\n");
-const arr = line2.split(' ').map(Number);
-console.log(Math.min(...arr), Math.max(...arr));
+let [n, ...arr] = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n');
+arr = arr[0].split(' ').map(Number).sort((a, b) => a - b);
+console.log(arr[0] + ' ' + arr[arr.length - 1]);
