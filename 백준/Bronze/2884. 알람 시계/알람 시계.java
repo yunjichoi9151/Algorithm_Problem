@@ -5,8 +5,9 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int sum = Integer.parseInt(st.nextToken()) * 60 + Integer.parseInt(st.nextToken()) - 45;
-        if(sum < 0) sum = 24 * 60 + sum;
-        System.out.println((sum / 60) + " " + (sum % 60));
+        int count = Integer.parseInt(st.nextToken()) * 60 + Integer.parseInt(st.nextToken());
+        if(count < 45) count += 24 * 60;
+        count -= 45;
+        System.out.println((count / 60) + " " + (count % 60));
     }
 }
