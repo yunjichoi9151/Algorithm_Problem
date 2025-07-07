@@ -1,8 +1,9 @@
-const input = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n');
-const n = Number(input[0]);
-const ans = input.slice(1, n + 1).map(line => {
-  const [num, str] = line.trim().split(' ');
-  return str.split('').map(ch => ch.repeat(Number(num))).join('');
-});
-
-console.log(ans.join('\n'));
+let [T, ...input] = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n');
+T = Number(T);
+const answer = [];
+for(let i = 0; i < T; i++) {
+  const [N, S] = input[i].split(' ');
+  const num = Number(N);
+  answer.push(S.split('').map(c => c.repeat(num)).join(''));
+}
+console.log(answer.join('\n'));
