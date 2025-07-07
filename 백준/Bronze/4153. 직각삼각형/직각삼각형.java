@@ -4,23 +4,17 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st = new StringTokenizer(br.readLine());
         StringBuilder sb = new StringBuilder();
-        int A = Integer.parseInt(st.nextToken());
-        int B = Integer.parseInt(st.nextToken());
-        int C = Integer.parseInt(st.nextToken());
-        while(A != 0 && B != 0 && C != 0) {
-            if((Math.pow(A, 2) == Math.pow(B, 2) + Math.pow(C, 2))
-            || (Math.pow(B, 2) == Math.pow(A, 2) + Math.pow(C, 2))
-            || (Math.pow(C, 2) == Math.pow(A, 2) + Math.pow(B, 2))) {
-                sb.append("right\n");
-            } else {
-                sb.append("wrong\n");
+        StringTokenizer st;
+        String S;
+        while(!(S = br.readLine()).equals("0 0 0")) {
+            st = new StringTokenizer(S);
+            int[] num = new int[3];
+            for(int i = 0; i < 3; i++) {
+                num[i] = Integer.parseInt(st.nextToken());
             }
-            st = new StringTokenizer(br.readLine());
-            A = Integer.parseInt(st.nextToken());
-            B = Integer.parseInt(st.nextToken());
-            C = Integer.parseInt(st.nextToken());
+            Arrays.sort(num);
+            sb.append(Math.pow(num[2], 2) == (Math.pow(num[0], 2) + Math.pow(num[1], 2)) ? "right\n" : "wrong\n");
         }
         System.out.println(sb.toString().trim());
     }
