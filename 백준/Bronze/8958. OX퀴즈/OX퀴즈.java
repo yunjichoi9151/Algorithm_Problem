@@ -5,12 +5,12 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
         int T = Integer.parseInt(br.readLine());
-        for(int i = 0; i < T; i++) {
-            char[] arr = br.readLine().toCharArray();
-            int ans = 0;
+        for(int tc = 0; tc < T; tc++) {
+            String S = br.readLine();
             int cnt = 0;
-            for(int j = 0; j < arr.length; j++) {
-                if(arr[j] == 'O') {
+            int ans = 0;
+            for(int i = 0; i < S.length(); i++) {
+                if(S.charAt(i) == 'O') {
                     ans += ++cnt;
                 } else {
                     cnt = 0;
