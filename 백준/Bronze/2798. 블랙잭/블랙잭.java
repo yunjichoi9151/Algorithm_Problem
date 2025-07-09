@@ -7,22 +7,20 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
-        int ans = 0;
         st = new StringTokenizer(br.readLine());
         int[] arr = new int[N];
+        int max = 0;
         for(int i = 0; i < N; i++) {
             arr[i] = Integer.parseInt(st.nextToken());
         }
-        for(int i = 0; i < N - 2; i++) {
-            for(int j = i + 1; j < N - 1; j++) {
-                for(int k = j + 1; k < N; k++) {
-                    int sum = arr[i] + arr[j] + arr[k];
-                    if((M >= sum) && (sum > ans)) {
-                        ans = sum;
-                    }
+        for(int x = 0; x < N - 2; x++) {
+            for(int y = x + 1; y < N - 1; y++) {
+                for(int z = y + 1; z < N; z++) {
+                    int num = arr[x] + arr[y] + arr[z];
+                    if(num <= M && num > max) max = num;
                 }
             }
         }
-        System.out.println(ans);
+        System.out.println(max);
     }
 }
