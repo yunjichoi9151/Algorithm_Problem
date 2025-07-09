@@ -4,8 +4,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
-        int min = N - ((int)Math.log10(N) + 1) * 9;
-        for(int i = min; i < N; i++) {
+        int min = N - String.valueOf(N).length() * 9;
+        for(int i = min; i <= N; i++) {
             int sum = i;
             int tmp = i;
             while(tmp > 0) {
@@ -17,6 +17,6 @@ public class Main {
                 return;
             }
         }
-        System.out.println(0);
+        System.out.println("0");
     }
 }
