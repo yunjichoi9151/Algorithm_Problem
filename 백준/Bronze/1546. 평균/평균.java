@@ -5,15 +5,17 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int N = Integer.parseInt(br.readLine());
-        double[] arr = new double[N];
-        double max = 0;
+        double M = 0;
         double sum = 0;
+        double[] arr = new double[N];
         StringTokenizer st = new StringTokenizer(br.readLine());
         for(int i = 0; i < N; i++) {
             arr[i] = Double.parseDouble(st.nextToken());
-            sum += (double) arr[i];
-            max = Math.max(max, arr[i]);
+            if(arr[i] > M) M = arr[i];
         }
-        System.out.println(sum * 100 / max / N);
+        for(int i = 0; i < N; i++) {
+            sum += arr[i] / M * 100;
+        }
+        System.out.println(sum / N);
     }
 }
