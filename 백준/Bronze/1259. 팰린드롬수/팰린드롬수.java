@@ -4,18 +4,18 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        String S = br.readLine();
-        while(!S.equals("0")) {
+        String S;
+        while(!((S = br.readLine()).equals("0"))) {
+            int len = S.length();
             boolean isTrue = true;
-            for(int i = 0; i < S.length() / 2; i++) {
-                if(S.charAt(i) != S.charAt(S.length() - i - 1)) {
+            for(int i = 0; i < len / 2; i++) {
+                if(S.charAt(i) != S.charAt(len - 1 - i)) {
                     sb.append("no\n");
                     isTrue = false;
                     break;
                 }
             }
             if(isTrue) sb.append("yes\n");
-            S = br.readLine();
         }
         System.out.println(sb.toString().trim());
     }
