@@ -7,11 +7,11 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int A = Integer.parseInt(st.nextToken());
         int B = Integer.parseInt(st.nextToken());
-        int min = Math.min(A, B);
-        int div = 0;
-        for(int i = 1; i <= min; i++) {
-            if(A % i == 0 && B % i == 0) div = i;
-        }
-        System.out.println(div + "\n" + (A * B / div));
+        int GCD = gcd(A, B);
+        System.out.println(GCD + "\n" + (A * B / GCD));
+    }
+
+    static int gcd(int a, int b) {
+        return b == 0 ? a : gcd(b, a % b);
     }
 }
