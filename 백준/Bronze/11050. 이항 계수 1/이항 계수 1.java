@@ -7,16 +7,13 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         int K = Integer.parseInt(st.nextToken());
+        K = Math.min(K, N - K);
         int ans = 1;
-        if(K == 0) {
-            System.out.println("1");
-            return;
-        } else if(N / 2 < K) K = N - K;
-        for(int i = 0; i < K; i++) {
-            ans = ans * (N - i);
+        for(int i = N; i > N - K; i--) {
+            ans *= i;
         }
-        for(int i = 0; i < K; i++) {
-            ans = ans / (K - i);
+        for(int i = 1; i <= K; i++) {
+            ans /= i;
         }
         System.out.println(ans);
     }
