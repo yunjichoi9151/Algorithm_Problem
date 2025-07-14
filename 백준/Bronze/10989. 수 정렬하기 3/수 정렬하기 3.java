@@ -5,13 +5,13 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
         int N = Integer.parseInt(br.readLine());
-        int[] cnt = new int[10001];
+        int[] arr = new int[10001];
         for(int i = 0; i < N; i++) {
-            cnt[Integer.parseInt(br.readLine())]++;
+            arr[Integer.parseInt(br.readLine())]++;
         }
-        for(int i = 0; i < 10001; i++) {
-            for(int j = 0; j < cnt[i]; j++) {
-                sb.append(i + "\n");
+        for(int i = 0; i <= 10000; i++) {
+            while (arr[i]-- > 0) {
+                sb.append(i).append('\n');
             }
         }
         System.out.println(sb.toString().trim());
