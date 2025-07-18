@@ -1,19 +1,17 @@
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        ArrayList<Integer> numlist = new ArrayList<>();
-        for(int i = 0; i < n; i++)
-            numlist.add(sc.nextInt());
-        Collections.sort(numlist);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-		for(int i : numlist)
-			sb.append(i).append('\n');
-		System.out.println(sb);
-        sc.close();
+        int N = Integer.parseInt(br.readLine());
+        boolean[] arr = new boolean[2000001];
+        for(int i = 0; i < N; i++) {
+            arr[Integer.parseInt(br.readLine()) + 1000000] = true;
+        }
+        for(int i = 0; i <= 2000000; i++) {
+            if(arr[i]) sb.append((i - 1000000) + "\n");
+        }
+        System.out.println(sb.toString().trim());
     }
 }
