@@ -5,46 +5,30 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        while(true) {
-            String s = br.readLine();
-            if(s.equals(".")) break;
-            int idx = 0;
+        String S;
+        while(!(S = br.readLine()).equals(".")) {
             Stack<Character> stack = new Stack<>();
+            char[] arr = S.toCharArray();
             boolean isTrue = true;
-            outerLoop:
-            while(s.charAt(idx) != '.') {
-                char c = s.charAt(idx);
-                switch(c) {
-                    case '(' :
-                    case '[' :
-                        stack.push(c);
+            for(int i = 0; i < arr.length; i++) {
+                if(arr[i] == '(' || arr[i] == '[') stack.add(arr[i]);
+                else if(arr[i] == ')') {
+                    if(stack.isEmpty() || stack.peek() != '(') {
+                        isTrue = false;
                         break;
-                    case ')' :
-                        if(!stack.isEmpty() && stack.peek() == '(') {
-                            stack.pop();
-                            break;
-                        } else {
-                            isTrue = false;
-                            break outerLoop;
-                        }
-                    case ']' :
-                        if(!stack.isEmpty() && stack.peek() == '[') {
-                            stack.pop();
-                            break;
-                        } else {
-                            isTrue = false;
-                            break outerLoop;
-                        }
+                    }
+                    stack.pop();
                 }
-                idx++;
+                else if(arr[i] == ']') {
+                    if(stack.isEmpty() || stack.peek() != '[') {
+                        isTrue = false;
+                        break;
+                    }
+                    stack.pop();
+                }
             }
-            if(stack.isEmpty() && isTrue && idx == s.length() - 1) {
-                sb.append("yes");
-            } else {
-                sb.append("no");
-            }
-            sb.append('\n');
+            sb.append((isTrue && stack.isEmpty()) ? "yes" : "no").append('\n'); 
         }
-        System.out.print(sb.toString());
+        System.out.println(sb.toString().trim());
     }
 }
