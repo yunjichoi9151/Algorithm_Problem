@@ -1,27 +1,31 @@
-import java.util.Scanner;
-import java.util.Stack;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int t = sc.nextInt();
-        for(int tc = 1; tc <= t; tc++) {
-            String s = sc.next();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int T = Integer.parseInt(br.readLine());
+        for(int tc = 0; tc < T; tc++) {
+            char[] arr = br.readLine().toCharArray();
             Stack<Character> stack = new Stack<>();
-            for(int i = 0; i < s.length(); i++) {
-                char tmp = s.charAt(i);
-                if((tmp + "").equals("(")) {
-                    stack.push(s.charAt(i));
+            boolean isTrue = true;
+            for(int i = 0; i < arr.length; i++) {
+                if(arr[i] == '(') {
+                    stack.push('(');
                 }
-                else if((tmp + "").equals(")")) {
-                    if(stack.size() == 0) {
-                        stack.push(s.charAt(i));
+                else {
+                    if(stack.isEmpty() || stack.peek() != '(') {
+                        sb.append("NO\n");
+                        isTrue = false;
                         break;
+                    } else {
+                        stack.pop();
                     }
-                    stack.pop();
                 }
             }
-            System.out.println((stack.size() == 0 ? "YES" : "NO"));
+            if(isTrue) sb.append(stack.isEmpty() ? "YES" : "NO").append("\n");
         }
+        System.out.println(sb.toString().trim());
     }
 }
