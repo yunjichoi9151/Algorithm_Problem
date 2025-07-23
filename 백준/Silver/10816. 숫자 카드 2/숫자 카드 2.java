@@ -1,54 +1,22 @@
-import java.util.Arrays;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int[] arr = new int[n];
-        for(int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
-        }
-        Arrays.sort(arr);
-        int m = sc.nextInt();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        for(int i = 0; i < m; i++) {
-            int tmp = sc.nextInt();
-            sb.append(upperBound(arr, tmp) - lowerBound(arr, tmp)).append(' ');
+        int N = Integer.parseInt(br.readLine());
+        HashMap<Integer, Integer> map = new HashMap<>();
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for(int i = 0; i < N; i++) {
+            int num = Integer.parseInt(st.nextToken());
+            map.put(num, map.getOrDefault(num, 0) + 1);
         }
-        System.out.println(sb);
+        int M = Integer.parseInt(br.readLine());
+        st = new StringTokenizer(br.readLine());
+        for(int i = 0; i < M; i++) {
+            sb.append(map.getOrDefault(Integer.parseInt(st.nextToken()), 0)).append(" ");
+        }
+        System.out.println(sb.toString().trim());
     }
-    private static int lowerBound(int[] arr, int key) {
-		int lo = 0; 
-		int hi = arr.length; 
- 
-		while (lo < hi) {
- 
-			int mid = (lo + hi) / 2;
-			if (key <= arr[mid]) {
-				hi = mid;
-			}
-			else {
-				lo = mid + 1;
-			}
-		}
-		return lo;
-	}
- 
-	private static int upperBound(int[] arr, int key) {
-		int lo = 0; 
-		int hi = arr.length; 
- 
-		while (lo < hi) {
- 
-			int mid = (lo + hi) / 2;
-			if (key < arr[mid]) {
-				hi = mid;
-			}
-			else {
-				lo = mid + 1;
-			}
-		}
-		return lo;
-	}
 }
