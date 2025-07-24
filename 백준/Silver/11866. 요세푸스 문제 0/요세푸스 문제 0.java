@@ -1,25 +1,27 @@
+import java.io.*;
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
         StringBuilder sb = new StringBuilder();
-        int N = sc.nextInt();
-        int K = sc.nextInt();
-        Queue<Integer> que = new LinkedList<>();
         sb.append("<");
+        int N = Integer.parseInt(st.nextToken());
+        int K = Integer.parseInt(st.nextToken());
+        int now_idx = K - 1;
+        ArrayList<Integer> list = new ArrayList<>();
         for(int i = 1; i <= N; i++) {
-            que.add(i);
+            list.add(i);
         }
-        while(!que.isEmpty()) {
-            for(int i = 0; i < K - 1; i++) {
-                int x = que.poll();
-                que.add(x);
+        for(int i = 0; i < N; i++) {
+            sb.append(list.remove(now_idx));
+            if(i == N - 1) sb.append(">");
+            else {
+                sb.append(", ");
+                now_idx = (now_idx + K - 1) % list.size();
             }
-            sb.append(que.poll() + (!que.isEmpty() ? ", " : ""));
         }
-        sb.append('>');
         System.out.println(sb.toString());
-        sc.close();
     }
 }
