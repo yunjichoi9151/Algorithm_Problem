@@ -1,61 +1,28 @@
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
- 	public static void main(String[] args){
-		Scanner sc = new Scanner(System.in);
-		StringBuilder sb = new StringBuilder();
-		
-		int n = sc.nextInt();
-        int k = 0;
-        
-		Queue<Integer> que = new LinkedList<Integer>();
-		
-		for(int i = 0; i < n; i++) {
-			String s = sc.next();
-			switch (s) {
-			case "push":
-                k = sc.nextInt();
-				que.offer(k);
-				break;
-			case "pop":
-                if(que.isEmpty()) {
-                    sb.append(-1).append('\n');
-                }
-                else  {
-                    sb.append(que.poll()).append('\n');
-                }
-				break;
-			case "size":
-				sb.append(que.size()).append('\n');
-				break;
-			case "empty":
-				if(que.isEmpty()) {
-                    sb.append(1).append('\n');
-                }
-                else  {
-                    sb.append(0).append('\n');
-                }
-				break;
-			case "front":
-                if(que.isEmpty()) {
-                    sb.append(-1).append('\n');
-                }
-                else  {
-                    sb.append(que.peek()).append('\n');
-                }
-                break;
-            case "back":
-                if(que.isEmpty()) {
-                    sb.append(-1).append('\n');
-                }
-                else  {
-                    sb.append(k).append('\n');
-                }
-                break;
-			}
-		}
-        System.out.println(sb);
-	}
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int N = Integer.parseInt(br.readLine());
+        Deque<Integer> que = new LinkedList<>();
+        for(int i = 0; i < N; i++) {
+            String S = br.readLine();
+            if(S.equals("front")) {
+                sb.append(que.isEmpty() ? -1 : que.peek()).append("\n");
+            } else if(S.equals("back")) {
+                sb.append(que.isEmpty() ? -1 : que.peekLast()).append("\n");
+            } else if(S.equals("size")) {
+                sb.append(que.size()).append("\n");
+            } else if(S.equals("empty")) {
+                sb.append(que.isEmpty() ? 1 : 0).append("\n");
+            } else if(S.equals("pop")) {
+                sb.append(que.isEmpty() ? -1 : que.poll()).append("\n");;
+            } else {
+                que.add(Integer.parseInt(S.split(" ")[1]));
+            }
+        }
+        System.out.println(sb.toString().trim());
+    }
 }
