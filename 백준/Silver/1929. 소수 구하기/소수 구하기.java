@@ -1,40 +1,28 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int m = sc.nextInt();
-        int n = sc.nextInt();
-        ArrayList<Integer> arr = new ArrayList<>();
-        for(int i = m; i <= n; i++) {
-            int k = i / 2;
-            boolean b = false;
-            if(i >= 4) {
-                for(int j = 2; j <= k; j++) {
-                    if(i % j == 0) {
-                        break;
-                    } else {
-                        k = i / j;
-                        if(j >= k) {
-                            b = true;
-                        }
-                    }
-                }
-                if(b == true) {
-                    arr.add(i);
-                }
-            } else {
-                if(i == 1) {
-                    continue;
-                } else {
-                    arr.add(i);
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
+        int M = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+        boolean[] isPrime = new boolean[N + 1];
+        
+        for(int i = 2; i <= N; i++) {
+            isPrime[i] = true;
+        }
+        for(int i = 2; i * i <= N; i++) {
+            if(isPrime[i]) {
+                for(int j = i * i; j <= N; j += i) {
+                    isPrime[j] = false;
                 }
             }
         }
-        for(int i = 0; i < arr.size(); i++) {
-            System.out.println(arr.get(i));
+        for(int i = M; i <= N; i++) {
+            if(isPrime[i]) sb.append(i).append("\n");
         }
-        sc.close();
+        System.out.println(sb.toString().trim());
     }
 }
