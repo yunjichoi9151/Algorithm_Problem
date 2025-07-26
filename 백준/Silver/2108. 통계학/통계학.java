@@ -1,37 +1,42 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Scanner;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int[] arr = new int[n];
-        int[] arr2 = new int[8001];
-        ArrayList<Integer> arr3 = new ArrayList<>();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int N = Integer.parseInt(br.readLine());
+        int[] cnt_arr = new int[8001];
         int sum = 0;
-        int max = 0;
-        int max_num = 0;
-        for(int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
-            sum += arr[i];
-            arr2[arr[i] + 4000]++;
-            if(arr2[arr[i] + 4000] > max) {
-                max = arr2[arr[i] + 4000];
-                max_num = arr[i];
-            }
+        int max = Integer.MIN_VALUE;
+        int min = Integer.MAX_VALUE;
+        int max_cnt = Integer.MIN_VALUE;
+        int now_cnt = 0;
+        for(int i = 0; i < N; i++) {
+            int num = Integer.parseInt(br.readLine()) + 4000;
+            cnt_arr[num]++;
+            min = Math.min(num, min);
+            max = Math.max(num, max);
+            max_cnt = Math.max(cnt_arr[num], max_cnt);
+            sum += num - 4000;
         }
-        for(int i = 0; i <= 8000; i++) {
-            if(arr2[i] == max) {
-                arr3.add(i - 4000);
+        sb.append((int)Math.round((double)sum / N)).append("\n");
+        int cnt_sum = 0;
+        int mid_num = 0;
+        int max_cnt_num = 0;
+        for(int i = min; i <= max; i++) {
+            if(cnt_arr[i] == 0) continue;
+            if(cnt_arr[i] == max_cnt) {
+                now_cnt++;
+                if(now_cnt <= 2) max_cnt_num = i - 4000;
             }
+            if(cnt_sum <= N / 2 && N / 2 < cnt_sum + cnt_arr[i]) {
+                mid_num = i - 4000;
+            }
+            cnt_sum += cnt_arr[i];
         }
-        Arrays.sort(arr);
-        Collections.sort(arr3);
-        System.out.println(Math.round((double)sum / (double)n));
-        System.out.println(arr[n / 2]);
-        System.out.println(arr3.size() > 1 ? arr3.get(1) : max_num);
-        System.out.println(arr[n - 1] - arr[0]);
+        sb.append(mid_num).append("\n");
+        sb.append(max_cnt_num).append("\n");
+        sb.append(max - min).append("\n");
+        System.out.println(sb.toString().trim());
     }
 }
