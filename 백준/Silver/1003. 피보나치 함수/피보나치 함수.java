@@ -1,30 +1,20 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
+import java.io.*;
 
 public class Main {
-    static Integer[][] dp = new Integer[41][2];
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        dp[0][0] = 1;
-        dp[0][1] = 0;
-        dp[1][0] = 0;
-        dp[1][1] = 1;
-        int t = Integer.parseInt(br.readLine());
         StringBuilder sb = new StringBuilder();
-        while (t-- > 0) {
+        int T = Integer.parseInt(br.readLine());
+        int[][] fib = new int[41][2];
+        fib[0] = new int[]{1, 0};
+        fib[1] = new int[]{0, 1};
+        for(int i = 2; i < 41; i++) {
+            fib[i] = new int[]{fib[i - 1][0] + fib[i - 2][0], fib[i - 1][1] + fib[i - 2][1]};
+        }
+        for(int tc = 0; tc < T; tc++) {
             int n = Integer.parseInt(br.readLine());
-            fibonacci(n);
-            sb.append(dp[n][0] + " " + dp[n][1]).append('\n');
+            sb.append(fib[n][0]).append(" ").append(fib[n][1]).append("\n");
         }
-        System.out.println(sb);
-    }
-
-    static Integer[] fibonacci(int n) {
-        if (dp[n][0] == null || dp[n][1] == null) {
-            dp[n][0] = fibonacci(n - 1)[0] + fibonacci(n - 2)[0];
-            dp[n][1] = fibonacci(n - 1)[1] + fibonacci(n - 2)[1];
-        }
-        return dp[n];
+        System.out.println(sb.toString().trim());
     }
 }
