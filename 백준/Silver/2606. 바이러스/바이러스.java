@@ -1,44 +1,38 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    static int n, m, v;
-    static ArrayList<ArrayList<Integer>> list;
-    static boolean[] visit;
-    static int cnt = 0;
-
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        n = Integer.parseInt(br.readLine());
-        m = Integer.parseInt(br.readLine());
-        v = 1;
-        list = new ArrayList<>();
-        visit = new boolean[n + 1];
-        for (int i = 0; i <= n; i++) {
+        StringTokenizer st;
+        int N = Integer.parseInt(br.readLine());
+        int T = Integer.parseInt(br.readLine());
+        Queue<Integer> que = new LinkedList<>();
+        List<List<Integer>> list = new ArrayList<>();
+        boolean[] ischecked = new boolean[N + 1];
+        for(int i = 0; i <= N; i++) {
             list.add(new ArrayList<>());
         }
-        for (int i = 0; i < m; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int n1 = Integer.parseInt(st.nextToken());
-            int n2 = Integer.parseInt(st.nextToken());
-            list.get(n1).add(n2);
-            list.get(n2).add(n1);
+        for(int tc = 0; tc < T; tc++) {
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
+            list.get(a).add(b);
+            list.get(b).add(a);
         }
-        System.out.println(dfs(v));
-        br.close();
-    }
-
-    static int dfs(int i) {
-        visit[i] = true;
-        for (int k : list.get(i)) {
-            if (!visit[k]) {
-                cnt++;
-                dfs(k);
+        que.add(1);
+        ischecked[1] = true;
+        int cnt = 0;
+        while(!que.isEmpty()) {
+            int tmp = que.poll();   
+            for(int num : list.get(tmp)) {
+                if(!ischecked[num]) {
+                    que.add(num);
+                    ischecked[num] = true;
+                    cnt++;
+                }                
             }
         }
-        return cnt;
+        System.out.println(cnt);
     }
 }
