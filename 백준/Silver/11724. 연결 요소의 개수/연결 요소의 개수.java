@@ -2,43 +2,41 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static int[][] graph;
+    static ArrayList<Integer>[] list;
     static boolean[] visited;
-    static int N, M;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        N = stoi(st.nextToken());
-        M = stoi(st.nextToken());
-        graph = new int[N + 1][N + 1];
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        list = new ArrayList[N + 1];
         visited = new boolean[N + 1];
-        int answer = 0;
+        int ans = 0;
+        for(int i = 1; i <= N; i++) {
+            list[i] = new ArrayList<Integer>();
+        }
         for(int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
-            int a = stoi(st.nextToken());
-            int b = stoi(st.nextToken());
-            graph[a][b] = graph[b][a] = 1;
+            int u = Integer.parseInt(st.nextToken());
+            int v = Integer.parseInt(st.nextToken());
+            list[u].add(v);
+            list[v].add(u);
         }
         for(int i = 1; i <= N; i++) {
             if(!visited[i]) {
-                dfs(i);
-                answer++;
+                DFS(i);
+                ans++;
             }
         }
-        System.out.println(answer);
+        System.out.println(ans);
     }
 
-    static void dfs(int n) {
-        if(visited[n]) return;
-        visited[n] = true;
-        for(int i = 1; i <= N; i++) {
-            if(graph[n][i] == 1) {
-                dfs(i);
+    static void DFS(int now) {
+        visited[now] = true;
+        for(int i : list[now]) {
+            if(!visited[i]) {
+                DFS(i);
             }
         }
-    }
-
-    static int stoi(String s) {
-        return Integer.parseInt(s);
     }
 }
