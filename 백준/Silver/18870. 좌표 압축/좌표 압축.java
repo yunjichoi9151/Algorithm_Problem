@@ -1,33 +1,26 @@
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int[] arr1 = new int[n];
-        int[] arr2 = new int[n];
-        HashMap<Integer, Integer> rankingMap = new HashMap<Integer, Integer>();
-		for(int i = 0; i < n; i++) {
-			arr2[i] = arr1[i] = sc.nextInt();
-		}
-		Arrays.sort(arr2);
-		int rank = 0;
-		for(int v : arr2) {
-			if(!rankingMap.containsKey(v)) {
-				rankingMap.put(v, rank);
-				rank++;
-			}
-		}
-		
-		StringBuilder sb = new StringBuilder();
-		for(int key : arr1) {
-			int ranking = rankingMap.get(key);
-			sb.append(ranking).append(' ');
-		}
-		
-		System.out.println(sb);
-        sc.close();
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        int N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        long[] arr = new long[N];
+        TreeMap<Long, Integer> map = new TreeMap<>();
+        for(int i = 0; i < N; i++) {
+            arr[i] = Long.parseLong(st.nextToken());
+            map.put(arr[i], 1);
+        }
+        int sum = 0;
+        for(long num : map.keySet()) {
+            sum += 1;
+            map.put(num, sum - 1);
+        }
+        for(int i = 0; i < N; i++) {
+            sb.append(map.get(arr[i])).append(" ");
+        }
+        System.out.println(sb.toString().trim());
     }
 }
