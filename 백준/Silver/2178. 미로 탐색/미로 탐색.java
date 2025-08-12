@@ -13,8 +13,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int N = stoi(st.nextToken());
-        int M = stoi(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
         int[][] map = new int[N][M];
         boolean[][] visited = new boolean[N][M];
         int[] dx = {-1, 1, 0, 0};
@@ -22,7 +22,7 @@ public class Main {
         for(int i = 0; i < N; i++) {
             String S = br.readLine();
             for(int j = 0; j < M; j++) {
-                map[i][j] = S.charAt(j) - '0';
+                map[i][j] = Integer.parseInt(S.charAt(j) + "");
             }
         }
         Queue<Node> que = new LinkedList<>();
@@ -42,9 +42,5 @@ public class Main {
                 visited[nx][ny] = true;
             }
         }
-    }
-
-    static int stoi(String S) {
-        return Integer.parseInt(S);
     }
 }
