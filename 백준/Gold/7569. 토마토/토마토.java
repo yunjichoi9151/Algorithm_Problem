@@ -3,60 +3,59 @@ import java.util.*;
 
 public class Main {
     static class Node {
-        int x, y, z, day;
-        public Node(int x, int y, int z, int day) {
+        int x, y, z, cnt;
+        public Node(int x, int y, int z, int cnt) {
             this.x = x;
             this.y = y;
             this.z = z;
-            this.day = day;
+            this.cnt = cnt;
         }
     }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int M = stoi(st.nextToken());
-        int N = stoi(st.nextToken());
-        int H = stoi(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+        int H = Integer.parseInt(st.nextToken());
         int[][][] map = new int[H][N][M];
-        Queue<Node> que = new LinkedList<>();
-        int[] dx = {-1, 1, 0, 0, 0, 0};
+        int[] dx = {0, 0, 0, 0, -1, 1};
         int[] dy = {0, 0, -1, 1, 0, 0};
-        int[] dz = {0, 0, 0, 0, -1, 1};
-        int zero_cnt = 0;
-        for(int i = 0; i < H; i++) {
-            for(int j = 0; j < N; j++) {
+        int[] dz = {-1, 1, 0, 0, 0, 0};
+        Queue<Node> que = new LinkedList<>();
+        int sum = M * N * H;
+        int tomato = 0;
+        for(int z = 0; z < H; z++) {
+            for(int y = 0; y < N; y++) {
                 st = new StringTokenizer(br.readLine());
-                for(int k = 0; k < M; k++) {
-                    map[i][j][k] = stoi(st.nextToken());
-                    if (map[i][j][k] == 0) zero_cnt++;
-                    else if(map[i][j][k] == 1) que.add(new Node(i, j, k, 0));
+                for(int x = 0; x < M; x++) {
+                    map[z][y][x] = Integer.parseInt(st.nextToken());
+                    if(map[z][y][x] == 1) {
+                        que.add(new Node(x, y, z, 0));
+                        tomato++;
+                    } else if(map[z][y][x] == -1) {
+                        sum--;
+                    }
                 }
             }
         }
-        if(zero_cnt == 0) {
+        if(sum == tomato) {
             System.out.println(0);
             return;
         }
-        int answer = -1;
+        int day = 0;
         while(!que.isEmpty()) {
             Node node = que.poll();
+            day = node.cnt;
             for(int i = 0; i < 6; i++) {
                 int nx = node.x + dx[i];
                 int ny = node.y + dy[i];
                 int nz = node.z + dz[i];
-                if(nx < 0 || ny < 0 || nz < 0 || nx >= H || ny >= N || nz >= M || map[nx][ny][nz] != 0) continue;
-                que.add(new Node(nx, ny, nz, node.day + 1));
-                map[nx][ny][nz] = 1;
-                zero_cnt--;
-            }
-            if(zero_cnt == 0) {
-                answer = node.day + 1;
-                break;
+                if(nx < 0 || ny < 0 || nz < 0 || nx >= M || ny >= N || nz >= H || map[nz][ny][nx] == -1 || map[nz][ny][nx] == 1) continue;
+                que.add(new Node(nx, ny, nz, node.cnt + 1));
+                map[nz][ny][nx] = 1;
+                tomato++;
             }
         }
-        System.out.println(answer);
-    }
-    static int stoi(String S) {
-        return Integer.parseInt(S);
+        System.out.println(sum == tomato ? day : -1);
     }
 }
