@@ -1,16 +1,18 @@
-let [input1, ...input2] = require('fs').readFileSync('/dev/stdin').toString().split('\n');
-const [N, M] = input1.trim().split(' ').map(Number);
+let [input0, ...input] = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(line => line.trim());
+const [N, M] = input0.split(' ').map(Number);
 const arr = new Array(N + 1);
-const nameMap = new Map();
+const map = new Map();
 const ans = [];
-for(let i = 0; i < N; i++) {
-  const name = input2[i].trim();
-  arr[i + 1] = name;
-  nameMap.set(name, i + 1);
+for(let i = 1; i <= N; i++) {
+  arr[i] = input[i - 1];
+  map.set(input[i - 1], i);
 }
-for(let i = 0; i < M; i++) {
-  let str = input2[N + i].trim();
-  if(!isNaN(str) && str !== '') ans.push(arr[Number(str)]);
-  else ans.push(nameMap.get(str));
+for(let i = N; i < N + M; i++) {
+  const now = input[i];
+  if(now[0] >= '0' && now[0] <= '9') {
+    ans.push(arr[Number(now)]);
+  } else {
+    ans.push(map.get(now));
+  }
 }
 console.log(ans.join('\n'));
