@@ -1,12 +1,12 @@
-const [input, ...input2] = require('fs').readFileSync('/dev/stdin').toString().split('\n');
-const [N, M] = input.trim().split(' ').map(Number);
-const passMap = new Map();
+const [input0, ...input] = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(line => line.trim());
+const [N, M] = input0.split(' ').map(Number);
+const map = new Map();
 const ans = [];
 for(let i = 0; i < N; i++) {
-  const [site, password] = input2[i].split(' ');
-  passMap.set(site, password);
+  const line = input[i].split(' ');
+  map.set(line[0], line[1]);
 }
 for(let i = N; i < N + M; i++) {
-  ans.push(passMap.get(input2[i].trim()));
+  ans.push(map.get(input[i]));
 }
 console.log(ans.join('\n'));
