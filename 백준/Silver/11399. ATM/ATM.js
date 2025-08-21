@@ -1,15 +1,10 @@
-let [N, input] = require('fs').readFileSync('/dev/stdin').toString().split('\n');
-N = Number(N.trim());
-input = input.split(' ').map(line => Number(line.trim()));
-const arr = [];
-for(let i = 0; i < N; i++) {
-  arr.push([i + 1, input[i]]);
-}
-arr.sort((a, b) => a[1] - b[1]);
-let cnt = 0;
-let sum = 0;
-for(let i = 0; i < N; i++) {
-  cnt += arr[i][1];
-  sum += cnt;
+let [N, input] = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(line => line.trim());
+N = Number(N);
+input = input.split(' ').map(Number);
+input.sort((a, b) => a - b);
+let sum = input[0];
+for(let i = 1; i < N; i++) {
+  input[i] += input[i - 1];
+  sum += input[i];
 }
 console.log(sum);
