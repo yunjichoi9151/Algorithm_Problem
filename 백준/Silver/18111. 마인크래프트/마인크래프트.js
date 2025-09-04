@@ -1,34 +1,29 @@
-const [[N, M, B], ...map] = require("fs")
-  .readFileSync("/dev/stdin")
-  .toString()
-  .split("\n")
-  .map((line) => line.trim().split(" ").map(Number));
+const [[N, M, B], ...map] = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(line => line.trim().split(' ').map(Number));
 let min = 257;
 let max = 0;
-const ans = [Number.MAX_VALUE, 0];
-for (let i = 0; i < N; i++) {
-  for (let j = 0; j < M; j++) {
-    if (min > map[i][j]) min = map[i][j];
-    if (max < map[i][j]) max = map[i][j];
+for(let i = 0; i < N; i++) {
+  for(let j = 0; j < M; j++) {
+    if(map[i][j] > max) max = map[i][j];
+    if(map[i][j] < min) min = map[i][j];
   }
 }
-for (let x = max; x >= min; x--) {
-  let cnt = B;
-  let time = 0;
-  for (let i = 0; i < N; i++) {
-    for (let j = 0; j < M; j++) {
-      if (x > map[i][j]) {
-        cnt -= x - map[i][j];
-        time += x - map[i][j];
-      } else if (x < map[i][j]) {
-        cnt += map[i][j] - x;
-        time += 2 * (map[i][j] - x);
-      }
+let min_height = 0;
+let min_time = Number.MAX_VALUE;
+for(let t = max; t >= min; t--) {
+  let need = 0, more = 0;
+  for(let i = 0; i < N; i++) {
+    for(let j = 0; j < M; j++) {
+      const h = map[i][j];
+      if(h > t) more += h - t;
+      else need += t - h;
     }
   }
-  if (cnt >= 0 && time < ans[0]) {
-    ans[0] = time;
-    ans[1] = x;
+  if(need <= more + B) {
+    const time = more * 2 + need;
+    if(time < min_time) {
+      min_time = time;
+      min_height = t;
+    }
   }
 }
-console.log(ans.join(" "));
+console.log(min_time + " " + min_height);
