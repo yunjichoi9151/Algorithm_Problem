@@ -7,11 +7,10 @@ public class Main {
         StringTokenizer st = new StringTokenizer(br.readLine());
         int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
-        int B = Integer.parseInt(st.nextToken());
+        long B = Long.parseLong(st.nextToken());
         int[][] map = new int[N][M];
-        int max = 0;
         int min = 257;
-        int[] ans = {Integer.MAX_VALUE, 0};
+        int max = 0;
         for(int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
             for(int j = 0; j < M; j++) {
@@ -20,25 +19,25 @@ public class Main {
                 if(max < map[i][j]) max = map[i][j];
             }
         }
-        for(int n = max; n >= min; n--) {
-            int cnt = B;
-            int time = 0;
+        int height = 0;
+        Long min_time = Long.MAX_VALUE;
+        for(int t = max; t >= min; t--) {
+            long extra = 0, need = 0;
             for(int i = 0; i < N; i++) {
                 for(int j = 0; j < M; j++) {
-                    if(n > map[i][j]) {
-                        cnt -= n - map[i][j];
-                        time += n - map[i][j];
-                    } else {
-                        cnt += map[i][j] - n;
-                        time += 2 * (map[i][j] - n);
-                    }
+                    int h = map[i][j];
+                    if(h > t) extra += h - t;
+                    else need += t - h;
                 }
             }
-            if(cnt >= 0 && time < ans[0]) {
-                ans[0] = time;
-                ans[1] = n;
+            if(need <= extra + B) {
+                long time = 2 * extra + need;
+                if(time < min_time) {
+                    min_time = time;
+                    height = t;
+                }
             }
         }
-        System.out.println(ans[0] + " " + ans[1]);
+        System.out.println(min_time + " " + height);
     }
 }
