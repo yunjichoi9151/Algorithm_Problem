@@ -8,13 +8,13 @@ public class Main {
         int N = Integer.parseInt(br.readLine());
         PriorityQueue<Integer> que = new PriorityQueue<>(Collections.reverseOrder());
         for(int i = 0; i < N; i++) {
-            int num = Integer.parseInt(br.readLine());
-            if(num == 0) {
+            int x = Integer.parseInt(br.readLine());
+            if(x == 0) {
                 sb.append(que.isEmpty() ? 0 : que.poll()).append("\n");
             } else {
-                que.add(num);
+                que.add(x);
             }
         }
-        System.out.println(sb.toString().trim());
+        System.out.print(sb);
     }
 }
