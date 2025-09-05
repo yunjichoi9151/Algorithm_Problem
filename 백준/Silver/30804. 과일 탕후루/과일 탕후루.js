@@ -1,16 +1,17 @@
-const [[N], arr] = require('fs').readFileSync('/dev/stdin').toString().split('\n').map(line => line.trim().split(' ').map(Number));
+let [N, input] = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(line => line.trim());
+N = Number(N);
+input = input.split(' ').map(Number);
 const map = new Map();
 let left = 0;
-let right = 0;
-let max = 0;
-while(right < N) {
-  map.set(arr[right], (map.has(arr[right]) ? map.get(arr[right]) : 0) + 1);
+let ans = 0;
+for(let right = 0; right < N; right++) {
+  map.set(input[right], (map.has(input[right]) ? map.get(input[right]) : 0) + 1);
   while(map.size > 2) {
-    map.set(arr[left], map.get(arr[left]) - 1);
-    if(map.get(arr[left]) === 0) map.delete(arr[left]);
-    left++;
+    const tmp = input[left++];
+    const tmp_cnt = map.get(tmp) - 1;
+    if(tmp_cnt === 0) map.delete(tmp);
+    else map.set(tmp, tmp_cnt);
   }
-  if(max < (right - left + 1)) max = right - left + 1;
-  right++;
+  ans = Math.max(ans, right - left + 1);
 }
-console.log(max);
+console.log(ans);
