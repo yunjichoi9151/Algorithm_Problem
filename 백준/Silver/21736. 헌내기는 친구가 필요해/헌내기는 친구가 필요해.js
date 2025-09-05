@@ -1,6 +1,7 @@
 class Queue {
   constructor() {
     this.arr = [];
+    this.head = 0;
   }
 
   add(num) {
@@ -8,42 +9,39 @@ class Queue {
   }
 
   poll() {
-    return this.arr.shift();
-  }
-
-  size() {
-    return this.arr.length;
+    return this.arr[this.head++];
   }
 
   isEmpty() {
-    return this.arr.length === 0;
+    return this.arr.length === this.head;
   }
 }
-let [input, ...arr] = require('fs').readFileSync('/dev/stdin').toString().split('\n').map(line => line.trim());
+
+let [input, ...map] = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(line => line.trim());
 const [N, M] = input.split(' ').map(Number);
-arr = arr.map(line => line.split(''));
-const visited = Array.from({length: N}, () => new Array(M).fill(false));
+map = map.map(line => line.split(''));
 const que = new Queue();
+const visited = Array.from({length : N}, () => new Array(M).fill(false));
 const dx = [-1, 1, 0, 0];
 const dy = [0, 0, -1, 1];
+let ans = 0;
 for(let i = 0; i < N; i++) {
   for(let j = 0; j < M; j++) {
-    if(arr[i][j] === 'I') {
+    if(map[i][j] === 'I') {
       que.add({x : i, y : j});
       visited[i][j] = true;
     }
   }
 }
-let cnt = 0;
 while(!que.isEmpty()) {
   const node = que.poll();
   for(let i = 0; i < 4; i++) {
     const nx = node.x + dx[i];
     const ny = node.y + dy[i];
-    if(nx < 0 || ny < 0 || nx >= N || ny >= M || visited[nx][ny] || arr[nx][ny] === 'X') continue;
-    if(arr[nx][ny] === 'P') cnt++;
-    visited[nx][ny] = true;
+    if(nx < 0 || ny < 0 || nx >= N || ny >= M || visited[nx][ny] || map[nx][ny] === 'X') continue;
     que.add({x : nx, y : ny});
+    visited[nx][ny] = true;
+    if(map[nx][ny] === 'P') ans++;
   }
 }
-console.log(cnt === 0 ? 'TT' : cnt);
+console.log(ans === 0 ? 'TT' : ans);
