@@ -1,53 +1,49 @@
 class Queue {
   constructor() {
     this.arr = [];
+    this.head = 0;
   }
 
-  add(n) {
-    this.arr.push(n);
+  add(num) {
+    this.arr.push(num);
   }
 
   poll() {
-    return this.arr.shift();
+    return this.arr[this.head++];
   }
 
   isEmpty() {
-    return this.arr.length === 0;
+    return this.arr.length === this.head;
   }
 }
 
 const [[N, M], ...input] = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(line => line.trim().split(' ').map(Number));
-const arr = Array.from({length: N + 1}, () => new Set());
+const arr = Array.from({ length: N + 1 }, () => []);
 let min = Number.MAX_VALUE;
-let ans = 0;
-for(let [a, b] of input) {
-  arr[a].add(b);
-  arr[b].add(a);
+let min_idx = 0;
+for(let i = 0; i < M; i++) {
+  arr[input[i][0]].push(input[i][1]);
+  arr[input[i][1]].push(input[i][0]);
 }
 for(let i = 1; i <= N; i++) {
-  const tmp = bfs(i);
-  if(min > tmp) {
-    min = tmp;
-    ans = i;
-  }
-}
-console.log(ans);
-
-function bfs(start) {
-  const visited = new Array(N + 1).fill(false);
   const que = new Queue();
-  que.add([start, 0]);
-  visited[start] = true;
+  const visited = new Array(N + 1).fill(false);
+  que.add({ x : i, cnt : 0});
+  visited[i] = true;
   let sum = 0;
   while(!que.isEmpty()) {
-    const [now, depth] = que.poll();
-    sum += depth;
-    for(let num of arr[now]) {
+    const node = que.poll();
+    sum += node.cnt;
+    for(let num of arr[node.x]) {
       if(!visited[num]) {
-        que.add([num, depth + 1]);
+        que.add({x : num, cnt : node.cnt + 1});
         visited[num] = true;
       }
     }
   }
-  return sum;
+  if(sum < min) {
+    min = sum;
+    min_idx = i;
+  }
 }
+console.log(min_idx);
