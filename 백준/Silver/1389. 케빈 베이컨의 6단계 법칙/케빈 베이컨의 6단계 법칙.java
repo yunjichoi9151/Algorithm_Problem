@@ -2,16 +2,23 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static int N;
-    static HashSet<Integer>[] arr;
+    static class Node {
+        int x, cnt;
+        public Node(int x, int cnt) {
+            this.x = x;
+            this.cnt = cnt;
+        }
+    }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        N = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
         int M = Integer.parseInt(st.nextToken());
-        arr = new HashSet[N + 1];
+        ArrayList<Integer>[] arr = new ArrayList[N + 1];
+        int min = Integer.MAX_VALUE;
+        int min_idx = 0;
         for(int i = 1; i <= N; i++) {
-            arr[i] = new HashSet<Integer>();
+            arr[i] = new ArrayList<Integer>();
         }
         for(int i = 0; i < M; i++) {
             st = new StringTokenizer(br.readLine());
@@ -20,36 +27,27 @@ public class Main {
             arr[a].add(b);
             arr[b].add(a);
         }
-        int min = Integer.MAX_VALUE;
-        int ans = 0;
         for(int i = 1; i <= N; i++) {
-            int num = bfs(i);
-            if(min > num) {
-                min = num;
-                ans = i;
-            }
-        }
-        System.out.println(ans);
-    }
-
-    static int bfs(int start) {
-        boolean[] visited = new boolean[N + 1];
-        Queue<int[]> que = new LinkedList<>();
-        que.add(new int[]{start, 0});
-        visited[start] = true;
-        int sum = 0;
-        while(!que.isEmpty()) {
-            int[] node = que.poll();
-            int now = node[0];
-            int depth = node[1];
-            sum += depth;
-            for(int num : arr[now]) {
-                if(!visited[num]) {
-                    visited[num] = true;
-                    que.add(new int[]{num, depth + 1});
+            Queue<Node> que = new LinkedList<>();
+            boolean[] visited = new boolean[N + 1];
+            que.add(new Node(i, 0));
+            visited[i] = true;
+            int sum = 0;
+            while(!que.isEmpty()) {
+                Node node = que.poll();
+                sum += node.cnt;
+                for(int num : arr[node.x]) {
+                    if(!visited[num]) {
+                        que.add(new Node(num, node.cnt + 1));
+                        visited[num] = true;
+                    }
                 }
             }
+            if(sum < min) {
+                min = sum;
+                min_idx = i;
+            }
         }
-        return sum;
+        System.out.println(min_idx);
     }
 }
