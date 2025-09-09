@@ -38,33 +38,33 @@ class Heap {
     this.heap[idx] = current;
   }
 
-_heapifyDown() {
-  let idx = 0;
-  const length = this.heap.length;
-  const current = this.heap[0];
+  _heapifyDown() {
+    let idx = 0;
+    const length = this.heap.length;
+    const current = this.heap[0];
 
-  while (true) {
-    const leftIdx = 2 * idx + 1;
-    const rightIdx = 2 * idx + 2;
+    while (true) {
+      const leftIdx = 2 * idx + 1;
+      const rightIdx = 2 * idx + 2;
 
-    if (leftIdx >= length) break;
+      if (leftIdx >= length) break;
 
-    let childIdx = leftIdx;
-    if (
-      rightIdx < length &&
-      this.compare(this.heap[rightIdx], this.heap[leftIdx]) < 0
-    ) {
-      childIdx = rightIdx;
+      let childIdx = leftIdx;
+      if (
+        rightIdx < length &&
+        this.compare(this.heap[rightIdx], this.heap[leftIdx]) < 0
+      ) {
+        childIdx = rightIdx;
+      }
+
+      if (this.compare(this.heap[childIdx], current) >= 0) break;
+
+      this.heap[idx] = this.heap[childIdx];
+      idx = childIdx;
     }
 
-    if (this.compare(this.heap[childIdx], current) >= 0) break;
-
-    this.heap[idx] = this.heap[childIdx];
-    idx = childIdx;
+    this.heap[idx] = current;
   }
-
-  this.heap[idx] = current;
-}
 
 
   isEmpty() {
@@ -72,12 +72,14 @@ _heapifyDown() {
   }
 }
 
-
-const [N, ...arr] = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(line => Number(line.trim()));
-const ans = [];
+const [N, ...input] = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(line => Number(line.trim()));
 const heap = new Heap();
+const ans = [];
 for(let i = 0; i < N; i++) {
-  if(arr[i] === 0) ans.push(heap.pop());
-  else heap.insert(arr[i]);
+  if(input[i] === 0) {
+    ans.push(heap.isEmpty() ? 0 : heap.pop());
+  } else {
+    heap.insert(input[i]);
+  }
 }
 console.log(ans.join('\n'));
