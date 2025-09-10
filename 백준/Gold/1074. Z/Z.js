@@ -1,10 +1,11 @@
 let [N, r, c] = require('fs').readFileSync('/dev/stdin').toString().trim().split(' ').map(Number);
-let half = Math.floor(Math.pow(2, N) / 2);
 let ans = 0;
-while(half > 0) {
-  ans += ((r < half ? 0 : 2) + (c < half ? 0 : 1)) * (half * half);
+while(N > 0) {
+  const half = 1 << (N - 1);
+  const where = (r >= half ? 2 : 0) + (c >= half ? 1 : 0);
+  ans += half * half * where;
   if(r >= half) r -= half;
   if(c >= half) c -= half;
-  half = Math.floor(half / 2);
+  N--;
 }
 console.log(ans);
