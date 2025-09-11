@@ -2,22 +2,21 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-static class Node {
-    int y, x, cnt;
-    public Node(int y, int x, int cnt) {
-        this.y = y;
-        this.x = x;
-        this.cnt = cnt;
+    static class Node {
+        int x, y, cnt;
+        public Node(int x, int y, int cnt) {
+            this.x = x;
+            this.y = y;
+            this.cnt = cnt;
+        }
     }
-}
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
         int M = Integer.parseInt(st.nextToken());
         int N = Integer.parseInt(st.nextToken());
         int[][] map = new int[N][M];
-        int sum = N * M;
-        int tomato = 0;
+        int need = 0;
         Queue<Node> que = new LinkedList<>();
         int[] dx = {-1, 1, 0, 0};
         int[] dy = {0, 0, -1, 1};
@@ -25,31 +24,29 @@ static class Node {
             st = new StringTokenizer(br.readLine());
             for(int j = 0; j < M; j++) {
                 map[i][j] = Integer.parseInt(st.nextToken());
-                if(map[i][j] == 1) {
-                    que.add(new Node(i, j, 0));
-                    tomato++;
-                } else if(map[i][j] == -1) {
-                    sum--;
-                }
+                if(map[i][j] == 0) need++;
+                else if(map[i][j] == 1) que.add(new Node(i, j, 0));
             }
         }
-        if(sum == tomato) {
+        if(need == 0) {
             System.out.println(0);
             return;
         }
-        int day = 0;
         while(!que.isEmpty()) {
             Node node = que.poll();
-            day = node.cnt;
             for(int i = 0; i < 4; i++) {
                 int nx = node.x + dx[i];
                 int ny = node.y + dy[i];
-                if(nx < 0 || ny < 0 || ny >= N || nx >= M || map[ny][nx] != 0) continue;
-                que.add(new Node(ny, nx, node.cnt + 1));
-                map[ny][nx] = 1;
-                tomato++;
+                if(nx < 0 || ny < 0 || nx >= N || ny >= M || map[nx][ny] != 0) continue;
+                que.add(new Node(nx, ny, node.cnt + 1));
+                map[nx][ny] = 1;
+                need--;
+                if(need == 0) {
+                    System.out.println(node.cnt + 1);
+                    return;
+                }
             }
         }
-        System.out.println(sum == tomato ? day : -1);
+        System.out.println(-1);
     }
 }
