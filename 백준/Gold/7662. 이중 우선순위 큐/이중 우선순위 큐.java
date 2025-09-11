@@ -12,31 +12,22 @@ public class Main {
             TreeMap<Integer, Integer> map = new TreeMap<>();
             for(int i = 0; i < k; i++) {
                 st = new StringTokenizer(br.readLine());
-                String Type = st.nextToken();
-                int n = Integer.parseInt(st.nextToken());
-                if(Type.equals("I")) {
-                    map.put(n, map.getOrDefault(n, 0) + 1);
+                String S = st.nextToken();
+                int N = Integer.parseInt(st.nextToken());
+                if(S.equals("I")) {
+                    map.put(N, map.getOrDefault(N, 0) + 1);
                 } else {
-                    if(map.size() == 0) continue;
-                    if(n == 1) {
-                        int key = map.lastKey();
-                        int num = map.get(key);
-                        if(num == 1) map.remove(key);
-                        else map.put(key, map.get(key) - 1);
-                    } else {
-                        int key = map.firstKey();
-                        int num = map.get(key);
-                        if(num == 1) map.remove(key);
-                        else map.put(key, map.get(key) - 1);
-                    }
+                    if(map.isEmpty()) continue;
+                    int key = (N == -1 ? map.firstKey() : map.lastKey());
+                    int num = map.get(key);
+                    if(num == 1) map.remove(key);
+                    else map.put(key, num - 1);
                 }
             }
-            if(map.size() == 0) {
-                sb.append("EMPTY").append("\n");
-            } else {
-                sb.append(map.lastKey()).append(" ").append(map.firstKey()).append("\n");
-            }
+            if(map.isEmpty()) sb.append("EMPTY");
+            else sb.append(map.lastKey()).append(" ").append(map.firstKey());
+            sb.append("\n");
         }
-        System.out.println(sb.toString().trim());
+        System.out.print(sb);
     }
 }
