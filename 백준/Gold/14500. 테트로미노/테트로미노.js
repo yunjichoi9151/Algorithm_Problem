@@ -1,23 +1,24 @@
 const [[N, M], ...map] = require('fs').readFileSync('/dev/stdin').toString().trim().split('\n').map(line => line.trim().split(' ').map(Number));
 const visited = Array.from({length : N}, () => new Array(M).fill(false));
-let max = 0;
 const dx = [-1, 1, 0, 0];
 const dy = [0, 0, -1, 1];
+let max = 0;
 for(let i = 0; i < N; i++) {
   for(let j = 0; j < M; j++) {
     DFS(i, j, 1, map[i][j]);
-    extraShape(i, j);
+    findT(i, j);
   }
 }
 console.log(max);
 
 function DFS(x, y, depth, sum) {
-  visited[x][y] = true;
   if(depth === 4) {
-    max = Math.max(max, sum);
-    visited[x][y] = false;
+    if(max < sum) {
+      max = sum;
+    }
     return;
   }
+  visited[x][y] = true;
   for(let i = 0; i < 4; i++) {
     const nx = x + dx[i];
     const ny = y + dy[i];
@@ -27,20 +28,21 @@ function DFS(x, y, depth, sum) {
   visited[x][y] = false;
 }
 
-function extraShape(x, y) {
+function findT(x, y) {
   for(let i = 0; i < 4; i++) {
-    let tmp = map[x][y];
-    let isPossible = true;
+    let sum = map[x][y];
+    let isOK = true;
     for(let j = 0; j < 4; j++) {
-      if(i === j) continue;
-      let nx = x + dx[j];
-      let ny = y + dy[j];
-      if(nx < 0 || ny < 0 || nx >= N || ny >= M) {
-        isPossible = false;
-        break;
+      if(i !== j) {
+        const nx = x + dx[j];
+        const ny = y + dy[j];
+        if(nx < 0 || ny < 0 || nx >= N || ny >= M) {
+          isOK = false;
+          break;
+        }
+        sum += map[nx][ny];
       }
-      tmp += map[nx][ny];
     }
-    if(isPossible) max = Math.max(max, tmp);
+    if(isOK && max < sum) max = sum;
   }
 }
