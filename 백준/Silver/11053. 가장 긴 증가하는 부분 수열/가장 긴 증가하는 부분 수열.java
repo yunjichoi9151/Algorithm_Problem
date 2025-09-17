@@ -1,26 +1,26 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int res = -1;
-        int[] arr = new int[n];
-        int[] dp = new int[n];
-        for(int i = 0; i < n; i++) {
-            arr[i] = sc.nextInt();
-            dp[i] = 1;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int[] arr = new int[N];
+        int[] dp = new int[N];
+        int max = 0;
+        for(int i = 0; i < N; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
         }
-        for(int i = 0; i < n; i++) {
+        for(int i = 0; i < N; i++) {
+            dp[i] = 1;
             for(int j = 0; j < i; j++) {
-                if(arr[j] < arr[i] && dp[i] <= dp[j]) {
-                    dp[i] = dp[j] + 1;
+                if(arr[j] < arr[i]) {
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
                 }
             }
-            if(dp[i] > res) {
-                res = dp[i];
-            }
+            max = Math.max(dp[i], max);
         }
-        System.out.println(res);
+        System.out.println(max);
     }
 }
