@@ -2,45 +2,37 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static int N;
-    static int[] parent;
-    static boolean[] visited;
-    static ArrayList<Integer>[] list;
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        N = Integer.parseInt(br.readLine());
-        list = new ArrayList[N + 1];
-        parent = new int[N + 1];
-        visited = new boolean[N + 1];
-        for(int i = 0; i < N + 1; i++) {
-            list[i] = new ArrayList<Integer>();
+        StringBuilder sb = new StringBuilder();
+        StringTokenizer st;
+        int N = Integer.parseInt(br.readLine());
+        ArrayList<Integer>[] list = new ArrayList[N + 1];
+        int[] parent = new int[N + 1];
+        for(int i = 1; i <= N; i++) {
+            list[i] = new ArrayList<>();
         }
         for(int i = 0; i < N - 1; i++) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
-            int a = stoi(st.nextToken());
-            int b = stoi(st.nextToken());
+            st = new StringTokenizer(br.readLine());
+            int a = Integer.parseInt(st.nextToken());
+            int b = Integer.parseInt(st.nextToken());
             list[a].add(b);
             list[b].add(a);
         }
-
-        dfs(1);
-
-        for(int i = 2; i < parent.length; i++) {
-            System.out.println(parent[i]);
-        }
-    }
-
-    static void dfs(int idx) {
-        visited[idx] = true;
-        for(int i : list[idx]) {
-            if(!visited[i]) {
-                parent[i] = idx;
-                dfs(i);
+        Queue<Integer> que = new LinkedList<>();
+        parent[1] = 1;
+        que.add(1);
+        while(!que.isEmpty()) {
+            int node = que.poll();
+            for(int num : list[node]) {
+                if(parent[num] != 0) continue;
+                parent[num] = node;
+                que.add(num);
             }
         }
-    }
-
-    static int stoi(String s) {
-        return Integer.parseInt(s);
+        for(int i = 2; i <= N; i++) {
+            sb.append(parent[i]).append("\n");
+        }
+        System.out.print(sb);
     }
 }
