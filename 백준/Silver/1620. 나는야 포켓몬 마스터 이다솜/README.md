@@ -4,7 +4,7 @@
 
 ### 성능 요약
 
-메모리: 64672 KB, 시간: 324 ms
+메모리: 51560 KB, 시간: 452 ms
 
 ### 분류
 
@@ -12,7 +12,7 @@
 
 ### 제출 일자
 
-2025년 8월 20일 17:01:18
+2025년 7월 28일 11:44:50
 
 ### 문제 설명
 
@@ -70,7 +70,7 @@
 
 <p>이다솜 : 피카츄 공격!</p>
 
-<p><img alt="" src="https://www.acmicpc.net/upload/201004/p6.PNG" style="height:182px; width:274px"></p>
+<p><img alt="" src="" style="height:182px; width:274px"></p>
 
 <p>가라 몬스터 볼!</p>
 
